@@ -10,6 +10,16 @@ from django.http import JsonResponse
 def index(request):
     return render(request,'diary/index.html')
 
+
+def showDiaryCreate(request):
+    return render(request, 'diary/diarycreate.html',{})
+
+def showDailyDiary(request):
+    return render(request, 'diary/dailydiary.html',{})
+
+def showCalandar(request):
+    return render(request,'diary/calandar.html',{})
+
 def showQuestion(request):
     mintUser = User.objects.get(pk=1)
     lemonUser = User.objects.get(pk=2)
@@ -17,10 +27,12 @@ def showQuestion(request):
     month = datetime.today().month
     day = datetime.today().day
     
-    mintAnswer = Question.objects.filter(author=mintUser,year=year,month=month,day=day)
-    lemonUser = Question.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    print("year month day",year,month,day)
     
-    context = {'mintAnswer' : mintAnswer, 'lemonUser' : lemonUser} 
+    mintAnswer = Question.objects.filter(author=mintUser,year=year,month=month,day=day)
+    lemonAnswer = Question.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    
+    context = {'mintAnswer' : mintAnswer, 'lemonAnswer' : lemonAnswer} 
     
     return render(request,'diary/todayquestion.html',context)
 
@@ -37,7 +49,7 @@ def saveAnswer(request):
         newQuestion.save()
         data = {'title':title, 'content':content,'userkey':userkey,'day':day,'month':month,'year':year}
         print(data)
-        return render(request,'diary/calandar.html',{'user' : user})
+        return redirect('/calandar/')
     else:
         return render(request, 'diary/todayquestion.html',{})
     

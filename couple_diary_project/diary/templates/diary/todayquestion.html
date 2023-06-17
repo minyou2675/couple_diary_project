@@ -6,13 +6,21 @@
     <body>
         <div class="wrapper">
             <div class="upperside">
-                <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
+                <!-- <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
+
+                <img  src="../../static/images/mint_heart.svg"/>
+            </button> -->
+            {% if mintAnswer%}
+            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickNext()">
 
                 <img  src="../../static/images/mint_heart.svg"/>
             </button>
-            {% if mintUser%}
                 <div id="mintletter" style="margin: 0 auto;">Completed</div>
             {% else %}
+            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
+
+                <img  src="../../static/images/mint_heart.svg"/>
+            </button>
             <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
             {% endif %}
           
@@ -22,13 +30,17 @@
                 <h3 id="question-title" style="font-size:16px; line-height:21.18px; color:#C8C8C8;">Q.당신이 가장 좋아하는 색은?</h3>
             </div>
             <div class="downside">
-                <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="alert('클릭!')">
+            
+            {% if lemonAnswer %}
+            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickNext()">
                 <img  src="../../static/images/lemon_heart.svg"/>
             </button>
-            {% if lemonUser %}
-                <div style="margin: 0 auto;">Completed</div>
+                <div id="lemonletter" style="margin: 0 auto;">Completed</div>
             {% else%}
-            <div style="margin: 0 auto;">Click to start writing</div>
+            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickQuestion2()">
+                <img  src="../../static/images/lemon_heart.svg"/>
+            </button>
+            <div id="lemonletter" style="margin: 0 auto;">Click to start writing</div>
             {% endif %}
             {% csrf_token %}
             </div>
@@ -42,9 +54,16 @@
 </html>
 <script>
     mintHeart = document.getElementsByClassName('mintbtn')[0];
-    mintLetter = document.getElementById('mintletter')
+    mintLetter = document.getElementById('mintletter');
+
+    lemonHeart = document.getElementsByClassName('lemonbtn')[0];
+    lemonLetter = document.getElementById('lemonletter');
+
     upperSide = document.getElementsByClassName('upperside')[0];
- 
+    downSide = document.getElementsByClassName('downside')[0];
+    function onClickNext(){
+        window.location.href = "/calandar/";
+    }
     function onClickQuestion(){
         mintHeart.remove();
         mintLetter.remove();
@@ -62,8 +81,8 @@
             const formData = new FormData();
             let date = new Date();
             const viewYear = date.getFullYear();
-            const viewMonth = date.getMonth();
-            const viewDay = date.getDay();
+            const viewMonth = date.getMonth()+1;
+            const viewDay = date.getDate();
             answer = document.getElementsByClassName('answerForm')[0].value;
             title = document.getElementsByClassName('question')[1];
             formData.append('year',viewYear);
@@ -80,6 +99,55 @@
               })
               .then(data => {
                 console.log('Success:', data);
+              
+               
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+
+        });
+    }
+
+    function onClickQuestion2(){
+        lemonHeart.remove();
+        lemonLetter.remove();
+        let answerForm = document.createElement('textarea');
+        let lemonSave = document.createElement('button');
+        let lemonSaveImg = new Image();
+        answerForm.setAttribute('class','answerform');
+        lemonSave.setAttribute('class','lemonbtn');
+        lemonSave.style.marginTop = '16px'; 
+        lemonSaveImg.src='../../static/images/lemon_save.svg'
+        lemonSave.appendChild(lemonSaveImg);
+        downSide.appendChild(answerForm);
+        downSide.appendChild(lemonSave);
+        lemonSave.addEventListener("click",function(e){
+            const formData = new FormData();
+            let date = new Date();
+            const viewYear = date.getFullYear();
+            const viewMonth = date.getMonth()+1;
+            const viewDay = date.getDate();
+            answer = document.getElementsByClassName('answerForm')[0].value;
+            title = document.getElementsByClassName('question')[1];
+            formData.append('year',viewYear);
+            formData.append('month',viewMonth);
+            formData.append('day',viewDay);
+            formData.append('content',answer);
+            formData.append('title',title);
+            formData.append('user',2);
+
+            fetch('/saveanswer/', {
+                method: 'POST',
+                headers: { "X-CSRFToken": '{{csrf_token}}' },
+                body: formData,
+                redirect: 'follow'
+              })
+              .then(res => {
+                console.log('Success:', res);
+                window.location.assign('/calandar');
+             
+               
               })
               .catch(error => {
                 console.error('Error:', error);

@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.index),
     path('dailyquestion/', views.showQuestion),
     path('saveanswer/',views.saveAnswer),
+    path('calandar/', views.showCalandar),
     
     
 ]
