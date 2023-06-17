@@ -90,7 +90,7 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
-            formData.append('user',1);
+        
 
             fetch('/saveanswer/', {
                 method: 'POST',
@@ -135,7 +135,6 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
-            formData.append('user',2);
 
             fetch('/saveanswer/', {
                 method: 'POST',

@@ -60,14 +60,13 @@ def saveAnswer(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        userkey = request.POST.get('user')
-        user = User.objects.get(pk=userkey)
+        user = request.user
         day = request.POST.get('day')
         year = request.POST.get('year')
         month = request.POST.get('month')
         newQuestion = Question(title=title,content=content,year=year,month=month,day=day,author=user)
         newQuestion.save()
-        data = {'title':title, 'content':content,'userkey':userkey,'day':day,'month':month,'year':year}
+        data = {'title':title, 'content':content,'day':day,'month':month,'year':year}
         print(data)
         return redirect('/calandar/')
     else:
