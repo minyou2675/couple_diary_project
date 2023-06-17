@@ -68,7 +68,7 @@
             <img src="../../static/images/question_list.svg">
         </button>
 
-        <button class="dailyBtn" onclick="alert('클릭')">
+        <button class="dailyBtn" onclick="onClickToDiary()">
             DAILY ver.
         </button>
 
@@ -87,6 +87,10 @@
 <script>
     let date = new Date();
     const first = new Date("2023-1-12");
+
+    function onClickToDiary(){
+        window.location.href = '/dailydiary/';
+    }
     
     const renderDate = () => {
         const viewYear = date.getFullYear();

@@ -6,6 +6,7 @@ urlpatterns = [
     path('dailyquestion/', views.showQuestion),
     path('saveanswer/',views.saveAnswer),
     path('calandar/', views.showCalandar),
+    path('dailydiary/',views.showDailyDiary),
     
     
 ]

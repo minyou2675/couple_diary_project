@@ -15,7 +15,15 @@ def showDiaryCreate(request):
     return render(request, 'diary/diarycreate.html',{})
 
 def showDailyDiary(request):
-    return render(request, 'diary/dailydiary.html',{})
+    mintUser = User.objects.get(pk=1)
+    lemonUser = User.objects.get(pk=2)
+    month = datetime.today().month
+    year = datetime.today().year
+    day = datetime.today().day
+    mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
+    lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    context = {'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
+    return render(request, 'diary/dailydiary.html',context)
 
 def showCalandar(request):
     return render(request,'diary/calandar.html',{})
