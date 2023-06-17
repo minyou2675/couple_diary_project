@@ -1,0 +1,103 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+    background-color: #FFF8B6;
+}
+
+input{
+    border:0 solid black;
+    background-color: transparent;
+}
+
+#yearmonth{
+    margin-top: 28px;
+    margin-left: 12px;
+    margin-right: 156px;
+    width: 180px;
+    height: 32px;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42.37px;
+    color: #9AE9DB;
+  
+}
+
+#dday{
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 213px;
+    width: 129px;
+    height: 24px;
+    font-weight: 400;
+    font-size: 24px;
+    color: #FFFFFF;
+
+}
+
+.photo{
+    margin-top:38px;
+    margin-left:70px;
+    margin-right:76px;
+    width:190px;
+    height: 310px;
+    background-color: #FFFFFF;
+    
+}
+
+.photoUpload{
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 160px;
+    height: 250px;
+    background-color: #D9D9D9;
+    font-weight: 400;
+    font-size: 9px;
+    line-height: 16px;
+    text-align: center;
+
+}
+
+#chooseFile {
+    visibility: hidden;
+}
+#diaryTitle{
+    margin-top: 37px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26.48px;
+
+}
+#diaryContent{
+    margin-top: 18px;
+    width: 323px;
+    height: 180px;
+    word-break:break-all;
+    background-image: url('../images/letter_line.svg');
+}
+
+#diarySubmit{
+    margin-top: 13px;
+    margin-left: 128px;
+    margin-right: 128px;
+    font-display: none;
+    width: 91px;
+    height: 29px;
+    background-image: url('../images/mint_save_button.svg');
+}
+
+.footer{
+    margin-top:3px;
+    margin-left:133px;
+    margin-right:133px;
+    text-align: center;
+    width:93px;
+    height:16px;
+    color : #9AE9DB
+}

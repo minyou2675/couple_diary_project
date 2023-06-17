@@ -1,0 +1,52 @@
+<html>
+<head>
+    <link rel="stylesheet" href="../../static/css/diarycreate.css">
+</head>
+<div class="wrapper">
+<div id="yearmonth"></div>
+<div id="dday"></div>
+<form id="diaryForm" method="post" enctype="multipart/form-data">
+    <div class="photo">
+        <div class="photoUpload">
+        <label for="chooseFile">
+            Upload Picture
+        </label>
+    </div>
+    </div>
+    <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"/>
+    <input type="text" id="diaryTitle" name="diaryTitle" placeholder="Title"/>
+    <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="Write Content"></textarea>
+    <input type="submit" placeholder="" value="" id="diarySubmit"/>
+</form>
+<div class="footer">
+    YOUNHEE&YUMIN
+</div>
+</div>
+
+</html>
+<script>
+    let date = new Date();
+    const first = new Date("2023-1-12");
+
+   
+    
+    const renderDate = () => {
+        const viewYear = date.getFullYear();
+        const viewMonth = date.getMonth();
+        const monthList = {1 : 'JAN', 2 : 'FEB', 3 : 'MAR', 4 : 'APR', 5 : 'MAY', 6 : 'JUN', 7 : 'JUL',
+                            8 : 'AUG', 9: 'SEP', 10 : 'OCT', 11: 'NOV', 12 : 'DEC'};
+        const todayMonth = monthList[viewMonth.toString()];
+
+        const diffDay= date - first;
+        const dDay = Math.floor(diffDay  / (1000*60*60*24));
+        
+
+        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth;
+        document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
+
+    }
+
+    renderDate();
+
+
+</script>

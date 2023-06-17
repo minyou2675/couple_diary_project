@@ -1,0 +1,92 @@
+<html>
+    <head>
+    <link rel="stylesheet" href="../../static/css/todayquestion.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <div class="upperside">
+                <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
+
+                <img  src="../../static/images/mint_heart.svg"/>
+            </button>
+            {% if mintUser%}
+                <div id="mintletter" style="margin: 0 auto;">Completed</div>
+            {% else %}
+            <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
+            {% endif %}
+          
+            </div>
+            <div class="question">
+                <h1 style="font-size:28px; line-height:37.07px; color:#9AE9DB;">TODAY's QUESTION</h1>
+                <h3 id="question-title" style="font-size:16px; line-height:21.18px; color:#C8C8C8;">Q.당신이 가장 좋아하는 색은?</h3>
+            </div>
+            <div class="downside">
+                <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="alert('클릭!')">
+                <img  src="../../static/images/lemon_heart.svg"/>
+            </button>
+            {% if lemonUser %}
+                <div style="margin: 0 auto;">Completed</div>
+            {% else%}
+            <div style="margin: 0 auto;">Click to start writing</div>
+            {% endif %}
+            {% csrf_token %}
+            </div>
+            <div class="footer">
+                YOUNHEE&YUMIN
+            </div>
+            </div>
+          
+    
+    </body>
+</html>
+<script>
+    mintHeart = document.getElementsByClassName('mintbtn')[0];
+    mintLetter = document.getElementById('mintletter')
+    upperSide = document.getElementsByClassName('upperside')[0];
+ 
+    function onClickQuestion(){
+        mintHeart.remove();
+        mintLetter.remove();
+        let answerForm = document.createElement('textarea');
+        let mintSave = document.createElement('button');
+        let mintSaveImg = new Image();
+        answerForm.setAttribute('class','answerform');
+        mintSave.setAttribute('class','mintbtn');
+        mintSave.style.marginTop = '16px'; 
+        mintSaveImg.src='../../static/images/mint_save.svg'
+        mintSave.appendChild(mintSaveImg);
+        upperSide.appendChild(answerForm);
+        upperSide.appendChild(mintSave);
+        mintSave.addEventListener("click",function(e){
+            const formData = new FormData();
+            let date = new Date();
+            const viewYear = date.getFullYear();
+            const viewMonth = date.getMonth();
+            const viewDay = date.getDay();
+            answer = document.getElementsByClassName('answerForm')[0].value;
+            title = document.getElementsByClassName('question')[1];
+            formData.append('year',viewYear);
+            formData.append('month',viewMonth);
+            formData.append('day',viewDay);
+            formData.append('content',answer);
+            formData.append('title',title);
+            formData.append('user',1);
+
+            fetch('/saveanswer/', {
+                method: 'POST',
+                headers: { "X-CSRFToken": '{{csrf_token}}' },
+                body: formData
+              })
+              .then(data => {
+                console.log('Success:', data);
+              })
+              .catch(error => {
+                console.error('Error:', error);
+              });
+
+        });
+    }
+
+    
+ </script>

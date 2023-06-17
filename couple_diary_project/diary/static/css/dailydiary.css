@@ -1,0 +1,103 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+}
+
+button.mintbtn{
+    border: 0;
+    outline: 0;
+    background-color:#FFF8B6; ;
+}
+button.lemonbtn{
+    border: 0;
+    outline: 0;
+    background-color:#9AE9DB; ;
+}
+
+.upperside{
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width:348px;
+    height:384px;
+    background-color: #FFF8B6;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26.48px;
+    color:#9AE9DB;
+}
+
+#yearmonth{
+    margin-top: 340px;
+    margin-left: 6px;
+    margin-right: 190px;
+    position: absolute;
+    width: 180px;
+    height: 32px;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42.37px;
+    color: #9AE9DB;
+  
+}
+
+.downside{
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width:348px;
+    height:384px; 
+    background-color: #9AE9DB;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26.48px;
+    color:#FFF8B6;
+}
+#dday{
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 213px;
+    width: 129px;
+    height: 24px;
+    font-weight: 400;
+    font-size: 24px;
+    color: #FFFFFF;
+
+}
+
+.monthlybtn{
+    margin-top: 369px;
+    margin-right: 9px;
+    margin-left: 248px;
+    width:91px;
+    height:29px;
+    position: absolute;
+    background-color: #F6FAF9;
+    border-radius:30px;
+    border: 0px solid;
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #9AE9DB;
+    z-index:1;
+}
+
+.footer{
+    margin-top:3px;
+    margin-left:133px;
+    margin-right:133px;
+    text-align: center;
+    width:93px;
+    height:16px;
+    color : #9AE9DB
+}

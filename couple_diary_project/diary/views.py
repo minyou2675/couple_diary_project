@@ -1,0 +1,44 @@
+from django.shortcuts import render,redirect
+from .models import *
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from datetime import datetime
+from django.http import JsonResponse
+
+
+# Create your views here.
+
+def index(request):
+    return render(request,'diary/index.html')
+
+def showQuestion(request):
+    mintUser = User.objects.get(pk=1)
+    lemonUser = User.objects.get(pk=2)
+    year = datetime.today().year
+    month = datetime.today().month
+    day = datetime.today().day
+    
+    mintAnswer = Question.objects.filter(author=mintUser,year=year,month=month,day=day)
+    lemonUser = Question.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    
+    context = {'mintAnswer' : mintAnswer, 'lemonUser' : lemonUser} 
+    
+    return render(request,'diary/todayquestion.html',context)
+
+def saveAnswer(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        userkey = request.POST.get('user')
+        user = User.objects.get(pk=userkey)
+        day = request.POST.get('day')
+        year = request.POST.get('year')
+        month = request.POST.get('month')
+        newQuestion = Question(title=title,content=content,year=year,month=month,day=day,author=user)
+        newQuestion.save()
+        data = {'title':title, 'content':content,'userkey':userkey,'day':day,'month':month,'year':year}
+        print(data)
+        return render(request,'diary/calandar.html',{'user' : user})
+    else:
+        return render(request, 'diary/todayquestion.html',{})
+    
+    
