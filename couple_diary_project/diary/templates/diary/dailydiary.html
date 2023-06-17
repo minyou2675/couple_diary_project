@@ -12,14 +12,14 @@
         <div id="yearmonth">2023 MAY</div>
     </div>
     
-    <button class="monthlybtn" onclick="alert('클릭!')">
+    <button class="monthlybtn" onclick="onClickToCalandar()">
         Monthly ver.
     </button>
     <div class="downside">
         <div id="dday">
             
         </div>
-        <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="alert('클릭!')">
+        <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickToDiaryCreate()">
         <img  src="../../static/images/lemon_heart.svg"/>
     </button>
         <div style="margin: 0 auto;">Click to start writing</div>
@@ -39,6 +39,10 @@
 
     function onClickToDiaryCreate(){
         window.location.href = '/diarycreate/';
+    }
+
+    function onClickToCalandar(){
+        window.location.href = '/calandar/';
     }
     
     const renderDate = () => {
