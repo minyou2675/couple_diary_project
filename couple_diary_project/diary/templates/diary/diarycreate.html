@@ -5,9 +5,12 @@
 <div class="wrapper">
 <div id="yearmonth"></div>
 <div id="dday"></div>
-<form id="diaryForm" method="post" enctype="multipart/form-data">
+<form id="diaryForm" method="post" action="/diarycreate/" enctype="multipart/form-data">
     <div class="photo">
         <div class="photoUpload">
+            <div id="image-show">
+
+            </div>
         <label for="chooseFile">
             Upload Picture
         </label>
@@ -17,6 +20,7 @@
     <input type="text" id="diaryTitle" name="diaryTitle" placeholder="Title"/>
     <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="Write Content"></textarea>
     <input type="submit" placeholder="" value="" id="diarySubmit"/>
+    {% csrf_token %}
 </form>
 <div class="footer">
     YOUNHEE&YUMIN
@@ -28,6 +32,27 @@
     let date = new Date();
     const first = new Date("2023-1-12");
 
+    function loadFile(input) {
+        var file = input.files[0];	//선택된 파일 가져오기
+    
+
+    
+          //새로운 이미지 div 추가
+        var newImage = document.createElement("img");
+        newImage.setAttribute("class", 'img');
+    
+        //이미지 source 가져오기
+        newImage.src = URL.createObjectURL(file);   
+    
+        newImage.style.width = "80%";
+        newImage.style.height = "80%";   //버튼을 누르기 전까지는 이미지를 숨긴다
+        newImage.style.objectFit = "contain";
+    
+        //이미지를 image-show div에 추가
+        var container = document.getElementById('image-show');
+    
+        container.appendChild(newImage);
+    };
    
     
     const renderDate = () => {

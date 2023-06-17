@@ -63,6 +63,10 @@ input{
     text-align: center;
 
 }
+#image-show{
+    width: max-content;
+    height: max-content;
+}
 
 #chooseFile {
     visibility: hidden;

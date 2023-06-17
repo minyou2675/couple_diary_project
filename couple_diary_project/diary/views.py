@@ -12,7 +12,19 @@ def index(request):
 
 
 def showDiaryCreate(request):
-    return render(request, 'diary/diarycreate.html',{})
+    if request.method == 'GET':
+        return render(request, 'diary/diarycreate.html',{})
+    elif request.method == 'POST':
+        author = request.user
+        image = request.FILES['chooseFile']
+        title = request.POST['diaryTitle']
+        content = request.POST['diaryContent']
+        month = datetime.today().month
+        year = datetime.today().year
+        day = datetime.today().day
+        newDiary = Diary(image=image,title=title,content=content,year=year,month=month,day=day,author=author)
+        newDiary.save()
+        return redirect('/dailydiary/')
 
 def showDailyDiary(request):
     mintUser = User.objects.get(pk=1)
