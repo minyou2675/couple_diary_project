@@ -24,8 +24,6 @@ class Schedule(models.Model):
     
 class Question(models.Model):
     title = models.CharField(max_length=80)
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
-    content = models.TextField()
     day = models.IntegerField()
     month = models.IntegerField()
     year = models.IntegerField()

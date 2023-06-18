@@ -14,11 +14,9 @@ def index(request):
 def showQuestionList(request):
     mintUser = User.objects.get(pk=1)
     lemonUser = User.objects.get(pk=2)
-    mintQuestion = Question.objects.filter(author=mintUser)
-    lemonQuestion = Question.objects.filter(author=lemonUser)
-    maxCount = mintQuestion.count() if mintQuestion.count() >= lemonQuestion.count() else lemonQuestion.count()
-    context = {'count' : maxCount, 'mintQuestion' : mintQuestion,
-               'lemonQuestion' : lemonQuestion}
+    answer = Answer.objects.all()
+    context = {
+               'answer' : answer}
     
     return render(request,'diary/questionlist.html',context)
     
@@ -62,8 +60,15 @@ def showQuestion(request):
     
     #question title 리스트
     question_title = ['좋아하는 색깔은?','먹고싶은 음식은?','하고싶은 것']
-    random_title = random.randint(0,3)
-    
+    random_title = 0
+    question = Question.objects.get(year=year,month=month,day=day)
+    #question 객체 생성
+    if(question):
+        question_title = question.title
+    else:
+        newQuestion = Question(title=question_title[random_title],year=year,month=month,day=day)
+        newQuestion.save()
+        
     print("year month day",year,month,day)
     
     mintAnswer = Answer.objects.filter(author=mintUser,year=year,month=month,day=day)
@@ -81,11 +86,10 @@ def saveAnswer(request):
         day = request.POST.get('day')
         year = request.POST.get('year')
         month = request.POST.get('month')
-        
+        question = Question.objects.get(year=year,month=month,day=day)
         #최초 답변이면 질문 저장
-        if(Question.objects.filter(title="") )
-        newQuestion = Question(title=title,content=content,year=year,month=month,day=day)
-        newQuestion.save()
+        newAnswer = Answer(question=question,author=user,year=year,month=month,day=day)
+        newAnswer.save()
         data = {'title':title, 'content':content,'day':day,'month':month,'year':year}
         print(data)
         return redirect('/calandar/')
