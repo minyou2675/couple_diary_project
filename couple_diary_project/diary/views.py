@@ -12,11 +12,25 @@ def index(request):
     return render(request,'diary/index.html')
 
 def showQuestionList(request):
-    mintUser = User.objects.get(pk=1)
-    lemonUser = User.objects.get(pk=2)
-    answer = Answer.objects.all()
+    month = datetime.today().month
+    year = datetime.today().year
+    day = datetime.today().day
+    mintUser= User.objects.get(pk=1)
+    lemonUser= User.objects.get(pk=2)
+    mintAnswer = Answer.objects.filter(author=mintUser,month=month,year=year,day=day)
+    question = Question.objects.get(year=year,month=month,day=day)
+
+   
+    lemonAnswer = Answer.objects.filter(author=lemonUser,month=month,year=year,day=day)
+    if lemonAnswer:
+        pass
+    else:
+        lemonAnswer = lemonAnswer.first()
+  
     context = {
-               'answer' : answer}
+               'mintAnswer' : mintAnswer,
+               'lemonAnswer' : lemonAnswer,
+               'question'   : question}
     
     return render(request,'diary/questionlist.html',context)
     
@@ -24,6 +38,15 @@ def showQuestionList(request):
 
 def showDiaryCreate(request):
     if request.method == 'GET':
+        month = datetime.today().month
+        year = datetime.today().year
+        day = datetime.today().day
+        schedule = Schedule.objects.filter(year=year,month=month,day=day)
+        if schedule:
+            pass
+        else:
+            schedule = Schedule(year=year,month=month,day=day,diary=0)
+            schedule.save()
         return render(request, 'diary/diarycreate.html',{})
     elif request.method == 'POST':
         author = request.user
@@ -33,16 +56,23 @@ def showDiaryCreate(request):
         month = datetime.today().month
         year = datetime.today().year
         day = datetime.today().day
+        
+        schedule = Schedule.objects.get(year=year,month=month,day=day)
         newDiary = Diary(image=image,title=title,content=content,year=year,month=month,day=day,author=author)
+        schedule.diary +=  1
+        schedule.save()
         newDiary.save()
+    
         return redirect('/dailydiary/')
 
 def showDailyDiary(request):
-    mintUser = User.objects.get(pk=1)
-    lemonUser = User.objects.get(pk=2)
     month = datetime.today().month
     year = datetime.today().year
     day = datetime.today().day
+
+    mintUser = User.objects.get(pk=1)
+    lemonUser = User.objects.get(pk=2)
+
     mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
     lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
     context = {'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
