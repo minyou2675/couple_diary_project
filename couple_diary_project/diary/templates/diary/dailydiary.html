@@ -5,10 +5,25 @@
 <body>    
 <div class="wrapper">
     <div class="upperside">
+        {% if mintDiary %}
+        {% for p in mintDiary %}
+        <div class="diary">
+            <div style="width: 195px; height:317px;">
+        <img  style="width: 195px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
+    </div>
+        <div class="diary-contents">
+            <div class="diary-title">{{p.title}}</div>
+
+        <p>{{p.content | linebreaksbr}}</p>
+    </div>
+    </div>
+        {% endfor %}
+        {% else %}
         <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickToDiaryCreate()">
         <img  src="../../static/images/mint_heart.svg"/>
     </button>
         <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
+        {% endif %}
         <div id="yearmonth">2023 MAY</div>
     </div>
     

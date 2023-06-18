@@ -8,6 +8,7 @@ urlpatterns = [
     path('calandar/', views.showCalandar),
     path('dailydiary/',views.showDailyDiary),
     path('diarycreate/',views.showDiaryCreate),
+    path('questionlist/',views.showQuestionList),
     
     
 ]

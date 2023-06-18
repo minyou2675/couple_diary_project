@@ -34,6 +34,39 @@ button.lemonbtn{
     color:#9AE9DB;
 }
 
+.diary{
+    display: flex;
+    flex-direction: row;
+    width: 348px;
+    height: 384px;
+
+}
+.diary-contents{
+    margin-right: 5px;
+    margin-top: 27.83px;
+    margin-right:16px;
+    float: left;
+    width:129px;
+    height: 241px;;
+}
+.diary-title{
+    width: 129px;
+    height: 24px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26.48;
+
+}
+.diary-content{
+    width: 129px;
+    height: 241px;
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 16px;
+
+}
+
+
 #yearmonth{
     margin-top: 340px;
     margin-left: 6px;

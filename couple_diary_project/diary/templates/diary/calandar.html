@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <button class="questionList" onclick="alert('클릭')">
+        <button class="questionList" onclick="onClickToList()">
             <img src="../../static/images/question_list.svg">
         </button>
 
@@ -87,7 +87,9 @@
 <script>
     let date = new Date();
     const first = new Date("2023-1-12");
-
+    function onClickToList(){
+        window.location.href='/questionlist/';
+    }
     function onClickToDiary(){
         window.location.href = '/dailydiary/';
     }

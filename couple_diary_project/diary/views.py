@@ -10,6 +10,18 @@ from django.http import JsonResponse
 def index(request):
     return render(request,'diary/index.html')
 
+def showQuestionList(request):
+    mintUser = User.objects.get(pk=1)
+    lemonUser = User.objects.get(pk=2)
+    mintQuestion = Question.objects.filter(author=mintUser)
+    lemonQuestion = Question.objects.filter(author=lemonUser)
+    maxCount = mintQuestion.count() if mintQuestion.count() >= lemonQuestion.count() else lemonQuestion.count()
+    context = {'count' : maxCount, 'mintQuestion' : mintQuestion,
+               'lemonQuestion' : lemonQuestion}
+    
+    return render(request,'diary/questionlist.html',context)
+    
+    
 
 def showDiaryCreate(request):
     if request.method == 'GET':
