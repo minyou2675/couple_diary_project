@@ -3,6 +3,7 @@ from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from datetime import datetime
 from django.http import JsonResponse
+import random
 
 
 # Create your views here.
@@ -59,12 +60,16 @@ def showQuestion(request):
     month = datetime.today().month
     day = datetime.today().day
     
+    #question title 리스트
+    question_title = ['좋아하는 색깔은?','먹고싶은 음식은?','하고싶은 것']
+    random_title = random.randint(0,3)
+    
     print("year month day",year,month,day)
     
-    mintAnswer = Question.objects.filter(author=mintUser,year=year,month=month,day=day)
-    lemonAnswer = Question.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    mintAnswer = Answer.objects.filter(author=mintUser,year=year,month=month,day=day)
+    lemonAnswer = Answer.objects.filter(author=lemonUser,year=year,month=month,day=day)
     
-    context = {'mintAnswer' : mintAnswer, 'lemonAnswer' : lemonAnswer} 
+    context = {'mintAnswer' : mintAnswer, 'lemonAnswer' : lemonAnswer, 'questionTitle' : question_title[random_title]} 
     
     return render(request,'diary/todayquestion.html',context)
 
@@ -76,7 +81,10 @@ def saveAnswer(request):
         day = request.POST.get('day')
         year = request.POST.get('year')
         month = request.POST.get('month')
-        newQuestion = Question(title=title,content=content,year=year,month=month,day=day,author=user)
+        
+        #최초 답변이면 질문 저장
+        if(Question.objects.filter(title="") )
+        newQuestion = Question(title=title,content=content,year=year,month=month,day=day)
         newQuestion.save()
         data = {'title':title, 'content':content,'day':day,'month':month,'year':year}
         print(data)
