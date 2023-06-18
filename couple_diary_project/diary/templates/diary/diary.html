@@ -18,11 +18,6 @@
     </div>
     </div>
         {% endfor %}
-        {% else %}
-        <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickToMintDiaryCreate()">
-        <img  src="../../static/images/mint_heart.svg"/>
-    </button>
-        <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
         {% endif %}
         <div id="yearmonth">2023 MAY</div>
     </div>
@@ -44,11 +39,6 @@
     
             <p>{{p.content | linebreaksbr}}</p>
             {% endfor %}
-        {% else %}
-        <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickToLemonDiaryCreate()">
-        <img  src="../../static/images/lemon_heart.svg"/>
-    </button>
-        <div style="margin: 0 auto;">Click to start writing</div>
         {% endif %}
     </div>
     <div class="footer">
@@ -57,24 +47,14 @@
 
     </div>
 </body>
-
-
-</html>
 <script>
     let date = new Date();
     const first = new Date("2023-1-12");
-
-    function onClickToMintDiaryCreate(){
-        window.location.href = '/diarycreate/1/';
-    }
-    function onClickToLemonDiaryCreate(){
-        window.location.href = '/diarycreate/2/';
-    }
-
+    
     function onClickToCalandar(){
         window.location.href = '/calandar/';
     }
-    
+
     const renderDate = () => {
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth();
@@ -91,5 +71,4 @@
 
     }
     renderDate();
-
 </script>

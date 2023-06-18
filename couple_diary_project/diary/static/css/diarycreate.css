@@ -96,6 +96,17 @@ input{
     background-image: url('../images/mint_save_button.svg');
 }
 
+
+#diarySubmit2{
+    margin-top: 13px;
+    margin-left: 128px;
+    margin-right: 128px;
+    font-display: none;
+    width: 91px;
+    height: 29px;
+    background-image: url('../images/lemon_save_button.svg');
+}
+
 .footer{
     margin-top:3px;
     margin-left:133px;

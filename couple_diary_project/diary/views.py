@@ -12,6 +12,21 @@ import random
 def index(request):
     return render(request,'diary/index.html')
 
+def showDiary(request,pk):
+    date = str(pk)
+    date = datetime.strptime(date,'%Y%m%d')
+    print(date)
+    year = date.year
+    month = date.month
+    day = date.day
+    print(day,month,year)
+    mintUser = User.objects.get(pk=1)
+    lemonUser = User.objects.get(pk=2)
+    mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
+    lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
+
+    return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary})
+
 def showQuestionList(request):
     month = datetime.today().month
     year = datetime.today().year
@@ -37,20 +52,26 @@ def showQuestionList(request):
     
     
 
-def showDiaryCreate(request):
+def showDiaryCreate(request,pk):
     if request.method == 'GET':
         month = datetime.today().month
         year = datetime.today().year
         day = datetime.today().day
+        if pk == 1:
+            user = 'mint'
+        else:
+            user = 'lemon'
         schedule = Schedule.objects.filter(year=year,month=month,day=day)
         if schedule:
             pass
         else:
             schedule = Schedule(year=year,month=month,day=day,diary=0)
             schedule.save()
-        return render(request, 'diary/diarycreate.html',{})
+            
+        return render(request, 'diary/diarycreate.html',{'user' : user})
     elif request.method == 'POST':
-        author = request.user
+        # author = request.user
+        author = User.objects.get(pk=pk)
         image = request.FILES['chooseFile']
         title = request.POST['diaryTitle']
         content = request.POST['diaryContent']
@@ -88,7 +109,7 @@ def showCalandar(request):
         week_diary = []
         for day in week:
             if day == 0:
-                 week_diary.append({'day' : day , 'diary' : 0})
+                 week_diary.append({'day' : ' ' , 'diary' : 0})
             else:
                 schedule = Schedule.objects.filter(year=year,month=month,day=day)
                 if schedule:
@@ -96,11 +117,11 @@ def showCalandar(request):
                     week_diary.append({'day' : day  ,'diary' : diary_count})
                 else:
                     week_diary.append({'day' : day , 'diary' : 0})
-        month_calendar.append({'week':week_diary})
+        month_calendar.append({'week':week_diary,'year' : year,'month':month})
     print(month_calendar)
                          
         
-    return render(request,'diary/calandar.html',{'calendar':month_calendar})
+    return render(request,'diary/calandar.html',{'calendar':month_calendar,'year':year,'month':month})
 
 def showQuestion(request):
     mintUser = User.objects.get(pk=1)
