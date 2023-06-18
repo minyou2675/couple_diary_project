@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Diary(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
-    image = models.ImageField(upload_to='diary/images/%Y/%m/%d/', blank=True)
+    image = models.ImageField(upload_to='diary/images/%Y/%m/%d/', null=True, blank=True)
     author = models.ForeignKey(User, related_name='user_diary',null=False,on_delete=models.CASCADE)
     day = models.IntegerField()
     month = models.IntegerField()

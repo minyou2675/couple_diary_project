@@ -72,7 +72,10 @@ def showDiaryCreate(request,pk):
     elif request.method == 'POST':
         # author = request.user
         author = User.objects.get(pk=pk)
-        image = request.FILES['chooseFile']
+        if request.FILES.get('chooseFile') is not None:
+            image = request.FILES.get('chooseFile')
+        else:
+            image = None
         title = request.POST['diaryTitle']
         content = request.POST['diaryContent']
         month = datetime.today().month
@@ -133,10 +136,10 @@ def showQuestion(request):
     #question title 리스트
     question_title = ['좋아하는 색깔은?','먹고싶은 음식은?','하고싶은 것']
     random_title = random.randint(0,len(question_title))
-    question = Question.objects.get(year=year,month=month,day=day)
+    question = Question.objects.filter(year=year,month=month,day=day)
     #question 객체 생성
     if(question):
-        question_title = question.title
+        question_title = question.first().title
     else:
         newQuestion = Question(title=question_title[random_title],year=year,month=month,day=day)
         question_title = question_title[random_title]
@@ -155,13 +158,14 @@ def saveAnswer(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        user = request.user
+        user = request.POST.get('userpk')
+        user = User.objects.get(pk=user)
         day = request.POST.get('day')
         year = request.POST.get('year')
         month = request.POST.get('month')
         question = Question.objects.get(year=year,month=month,day=day)
         #최초 답변이면 질문 저장
-        newAnswer = Answer(question=question,author=user,year=year,month=month,day=day)
+        newAnswer = Answer(question=question,content=content,author=user,year=year,month=month,day=day)
         newAnswer.save()
         data = {'title':title, 'content':content,'day':day,'month':month,'year':year}
         print(data)

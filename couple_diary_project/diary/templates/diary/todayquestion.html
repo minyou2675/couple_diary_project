@@ -90,15 +90,18 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
+            formData.append('userpk',1)
         
 
             fetch('/saveanswer/', {
                 method: 'POST',
                 headers: { "X-CSRFToken": '{{csrf_token}}' },
-                body: formData
+                body: formData,
+                redirect: 'follow'
               })
               .then(data => {
                 console.log('Success:', data);
+                window.location.assign('/calandar');
               
                
               })
@@ -116,6 +119,7 @@
         let lemonSave = document.createElement('button');
         let lemonSaveImg = new Image();
         answerForm.setAttribute('class','answerform');
+        answerForm.style.marginTop = "80px";
         lemonSave.setAttribute('class','lemonbtn');
         lemonSave.style.marginTop = '16px'; 
         lemonSaveImg.src='../../static/images/lemon_save.svg'
@@ -135,6 +139,8 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
+            formData.append('userpk',2);
+            console.log('answer',answer);
 
             fetch('/saveanswer/', {
                 method: 'POST',

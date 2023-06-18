@@ -8,13 +8,15 @@
         {% if mintDiary %}
         {% for p in mintDiary %}
         <div class="diary">
-            <div style="width: 195px; height:317px;">
-        <img  style="width: 195px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
+            <div style="width: 160px; height:317px;">
+        <img  style="width: 160px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
     </div>
         <div class="diary-contents">
-            <div class="diary-title">{{p.title}}</div>
+            <!-- <div class="diary-title">{{p.title}}</div>
 
-        <p>{{p.content | linebreaksbr}}</p>
+        <p>{{p.content | linebreaksbr}}</p> -->
+        <h5 style="font-size: 15px;">TITLE : {{p.title}}</h5>
+        <span style="font-size:15px;">{{p.content}}</span>
     </div>
     </div>
         {% endfor %}
@@ -36,8 +38,11 @@
         {% if  lemonDiary %}
             {% for p in lemonDiary %}
             <div class="diary">
-                <div style="width: 195px; height:317px;">
-            <img  style="width: 195px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
+                <div style="width: 160px; height:317px;">
+                    {% if p.image %}
+            <img  style="width: 160px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}' alt="이미지가 없습니다."/>
+                    {% else %}
+                    {% endif %}
         </div>
             <div class="diary-contents">
                 <div class="diary-title">{{p.title}}</div>
