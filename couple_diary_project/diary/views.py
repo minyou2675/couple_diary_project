@@ -3,6 +3,7 @@ from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from datetime import datetime
 from django.http import JsonResponse
+from calendar import monthcalendar  
 import random
 
 
@@ -79,7 +80,27 @@ def showDailyDiary(request):
     return render(request, 'diary/dailydiary.html',context)
 
 def showCalandar(request):
-    return render(request,'diary/calandar.html',{})
+    year = datetime.today().year
+    month = datetime.today().month
+    calendar = monthcalendar(year,month)
+    month_calendar = []
+    for week in calendar:   
+        week_diary = []
+        for day in week:
+            if day == 0:
+                 week_diary.append({'day' : day , 'diary' : 0})
+            else:
+                schedule = Schedule.objects.filter(year=year,month=month,day=day)
+                if schedule:
+                    diary_count = schedule.first().diary
+                    week_diary.append({'day' : day  ,'diary' : diary_count})
+                else:
+                    week_diary.append({'day' : day , 'diary' : 0})
+        month_calendar.append({'week':week_diary})
+    print(month_calendar)
+                         
+        
+    return render(request,'diary/calandar.html',{'calendar':month_calendar})
 
 def showQuestion(request):
     mintUser = User.objects.get(pk=1)
@@ -90,13 +111,14 @@ def showQuestion(request):
     
     #question title 리스트
     question_title = ['좋아하는 색깔은?','먹고싶은 음식은?','하고싶은 것']
-    random_title = 0
+    random_title = random.randint(0,len(question_title))
     question = Question.objects.get(year=year,month=month,day=day)
     #question 객체 생성
     if(question):
         question_title = question.title
     else:
         newQuestion = Question(title=question_title[random_title],year=year,month=month,day=day)
+        question_title = question_title[random_title]
         newQuestion.save()
         
     print("year month day",year,month,day)
@@ -104,7 +126,7 @@ def showQuestion(request):
     mintAnswer = Answer.objects.filter(author=mintUser,year=year,month=month,day=day)
     lemonAnswer = Answer.objects.filter(author=lemonUser,year=year,month=month,day=day)
     
-    context = {'mintAnswer' : mintAnswer, 'lemonAnswer' : lemonAnswer, 'questionTitle' : question_title[random_title]} 
+    context = {'mintAnswer' : mintAnswer, 'lemonAnswer' : lemonAnswer, 'questionTitle' : question_title} 
     
     return render(request,'diary/todayquestion.html',context)
 

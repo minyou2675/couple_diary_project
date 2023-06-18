@@ -17,52 +17,21 @@
         <input type="button" class="move" value="next >">    
         </div>
         <div class="calander">
+            {% for week in calendar %}
             <div class="col-7">
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
+                {% for day in week.week %}
+                <div class="day">{{day.day}}
+                {% if day.diary == 2 %}
+                <img src="../../static/images/full_heart.svg">
+                {% elif day.diary == 1 %}
+                <img src="../../static/images/empty_heart.svg">
+                {% else %}
+                {% endif %}
+                </div>
+                {% endfor %}
             </div>
-            <div class="col-7">
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
+            {% endfor %}
             </div>
-            <div class="col-7">
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-            </div>
-            <div class="col-7">
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-            </div>
-            <div class="col-7">
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-                <div class="day"> </div>
-            </div>
-        </div>
 
         <button class="questionList" onclick="onClickToList()">
             <img src="../../static/images/question_list.svg">
