@@ -72,7 +72,9 @@
         window.location.href = '/questionlist/' +prevpk;
     }
     function onClickToCalendar(){
-        window.location.href = '/calendar/';
+        var month = '{{month}}';
+        var year = '{{year}}';
+        window.location.href = `/calendar/${year}${month}`;
     }
 
     function onClickToNext(){

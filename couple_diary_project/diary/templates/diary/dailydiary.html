@@ -91,7 +91,9 @@
     }
 
     function onClickToCalendar(){
-        window.location.href = '/calendar/';
+        var year = '{{year}}'
+        var month = '{{month}}'
+        window.location.href = `/calendar/${year}${month}`;
     }
     
     const renderDate = () => {

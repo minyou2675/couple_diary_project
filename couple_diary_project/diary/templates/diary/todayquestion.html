@@ -63,7 +63,11 @@
     upperSide = document.getElementsByClassName('upperside')[0];
     downSide = document.getElementsByClassName('downside')[0];
     function onClickNext(){
-        window.location.href = "/calendar/";
+        let date = new Date();
+        const viewYear = date.getFullYear();
+        const viewMonth = date.getMonth()+1;
+        let currDate = viewYear.toString()+viewMonth.toString();
+        window.location.href = `/calendar/${currDate}`;
     }
     function onClickQuestion(){
         mintHeart.remove();
@@ -92,6 +96,9 @@
             formData.append('content',answer);
             formData.append('title',title);
             formData.append('userpk',1)
+            
+            //이번달 달력으로 이동 시키기
+            let currDate = viewYear.toString()+viewMonth.toString();
         
 
             fetch('/saveanswer/', {
@@ -102,7 +109,7 @@
               })
               .then(data => {
                 console.log('Success:', data);
-                window.location.assign('/calandar');
+                window.location.assign(`/calandar/${currDate}`);
               
                
               })
