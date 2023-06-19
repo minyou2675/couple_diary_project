@@ -6,8 +6,10 @@
 <div class="wrapper">
     <div class="upperside">
         {% if mintDiary %}
-        {% for p in mintDiary %}
+
         <div class="diary">
+
+            {% for p in mintDiary %}
             <div style="width: 160px; height:317px;">
         <img  style="width: 160px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
     </div>
@@ -29,7 +31,7 @@
         <div id="yearmonth">2023 MAY</div>
     </div>
     
-    <button class="monthlybtn" onclick="onClickToCalandar()">
+    <button class="monthlybtn" onclick="onClickToCalendar()">
         Monthly ver.
     </button>
     <div class="downside">
@@ -76,8 +78,8 @@
         window.location.href = '/diarycreate/2/';
     }
 
-    function onClickToCalandar(){
-        window.location.href = '/calandar/';
+    function onClickToCalendar(){
+        window.location.href = '/calendar/';
     }
     
     const renderDate = () => {
