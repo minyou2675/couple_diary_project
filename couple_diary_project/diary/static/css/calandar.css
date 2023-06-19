@@ -1,3 +1,5 @@
+
+
 input{
     border:0 solid black;
     background-color: transparent;
@@ -80,11 +82,13 @@ input.move{
     background-color: #FFF8B6;
     border-width: 1px;
     border-bottom: #C0BEA5;
+    /* align-items: center; */
 }
 .day{
     width:100px;
     height:auto;
     border: 1px solid #C0BEA5;
+    padding: 0 0 0 5px;
 }
 
 .btnSide{

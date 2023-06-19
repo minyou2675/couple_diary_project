@@ -10,7 +10,7 @@
 <form id="diaryForm" method="post" action="/diarycreate/1/" enctype="multipart/form-data">
     <div class="photo">
         <div class="photoUpload">
-            <div  id="image-show" style="width:100px;">
+            <div  id="image-show">
 
             </div>
         <label for="chooseFile">
@@ -36,7 +36,7 @@
     <form id="diaryForm" method="post" action="/diarycreate/2/" enctype="multipart/form-data">
         <div class="photo">
             <div class="photoUpload">
-                <div  id="image-show" style="width:100px;">
+                <div  id="image-show" style="width:160px;">
     
                 </div>
             <label for="chooseFile">
@@ -73,9 +73,9 @@
         //이미지 source 가져오기
         newImage.src = URL.createObjectURL(file);   
     
-        newImage.style.width = "50%";
-        newImage.style.height = "50%";   //버튼을 누르기 전까지는 이미지를 숨긴다
-        newImage.style.objectFit = "contain";
+        newImage.style.width = "90%";
+        newImage.style.height = "90%";
+        newImage.style.marginTop = "10px";
     
         //이미지를 image-show div에 추가
         var container = document.getElementById('image-show');

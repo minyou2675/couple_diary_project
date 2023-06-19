@@ -63,10 +63,7 @@ input{
     text-align: center;
 
 }
-#image-show{
-    width: max-content;
-    height: max-content;
-}
+
 
 #chooseFile {
     visibility: hidden;
@@ -78,6 +75,12 @@ input{
     line-height: 26.48px;
 
 }
+
+#image-show{
+    width: 160px;
+    height: 230px;
+}
+
 #diaryContent{
     margin-top: 18px;
     width: 323px;

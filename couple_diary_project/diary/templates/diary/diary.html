@@ -4,41 +4,49 @@
         </head>
 <body>    
 <div class="wrapper">
-    <div class="upperside">
-        {% if mintDiary %}
+    {% if mintDiary %}
+    <div class="uppersideV2">
         {% for p in mintDiary %}
-        <div class="diary">
-            <div style="width: 195px; height:317px;">
-        <img  style="width: 195px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
-    </div>
-        <div class="diary-contents">
-            <div class="diary-title">{{p.title}}</div>
-
-        <p>{{p.content | linebreaksbr}}</p>
-    </div>
-    </div>
-        {% endfor %}
+        {% if p.image %}
+        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
         {% endif %}
-        <div id="yearmonth">2023 MAY</div>
+        <div>
+            <h5>{{p.title}}</h5>
+            {{p.content}}
+        </div>
+
+    {% endfor %}
+</div>
+    {% else %}
+    <div class="upperside">
+       
     </div>
+    {% endif %}
+    <div id="yearmonth"></div>
     
-    <button class="monthlybtn" onclick="onClickToCalandar()">
+    <button class="monthlybtn" onclick="onClickToCalendar()">
         Monthly ver.
     </button>
-    <div class="downside">
-        <div id="dday">
-        </div>
+   
         {% if  lemonDiary %}
-            {% for p in lemonDiary %}
-            <div class="diary">
-                <div style="width: 195px; height:317px;">
-            <img  style="width: 195px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
+        <div class="downsideV2">
+            <div id="dday">
+            </div>
+        {% for p in lemonDiary %}
+        {% if p.image %}
+        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
+        {% endif %}
+        <div>
+            <h5>{{p.title}}</h5>
+            {{p.content}}
         </div>
-            <div class="diary-contents">
-                <div class="diary-title">{{p.title}}</div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="downside">
+            <div id="dday">
+            </div>
     
-            <p>{{p.content | linebreaksbr}}</p>
-            {% endfor %}
         {% endif %}
     </div>
     <div class="footer">
@@ -47,14 +55,24 @@
 
     </div>
 </body>
+
+
+</html>
 <script>
     let date = new Date();
     const first = new Date("2023-1-12");
 
-    function onClickToCalandar(){
-        window.location.href = '/calendar/';
+    function onClickToMintDiaryCreate(){
+        window.location.href = '/diarycreate/1/';
+    }
+    function onClickToLemonDiaryCreate(){
+        window.location.href = '/diarycreate/2/';
     }
 
+    function onClickToCalendar(){
+        window.location.href = '/calendar/';
+    }
+    
     const renderDate = () => {
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth()+1;
@@ -71,4 +89,5 @@
 
     }
     renderDate();
+
 </script>

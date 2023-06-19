@@ -104,11 +104,11 @@ button.lemonbtn{
 }
 
 .downsideV2 {
-    display: flex;
+    /* display: flex; */
     position:relative;
     flex-direction: row;
     width:348px;
-    height:384px; 
+    height:384px;
     background-color: #9AE9DB;
     font-weight: 400;
     font-size: 20px;
@@ -124,8 +124,10 @@ button.lemonbtn{
     font-weight: 400;
     font-size: 24px;
     color: #FFFFFF;
-
+    z-index: 1;
 }
+
+div#dday {}
 
 .monthlybtn{
     margin-top: 369px;
