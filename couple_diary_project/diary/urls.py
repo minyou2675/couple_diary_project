@@ -9,7 +9,7 @@ urlpatterns = [
     path('calendar/<int:pk>/',views.moveCalendar),
     path('dailydiary/',views.showDailyDiary),
     path('diarycreate/<int:pk>/',views.showDiaryCreate),
-    path('questionlist/',views.showQuestionList),
+    path('questionlist/<int:pk>',views.showQuestionList),
     path('diary/<int:pk>',views.showDiary),
     
     

@@ -11,58 +11,47 @@
                     TODAY'S QUESTION
                 </div>
                 <div id="questionTitle">
-                    Q: {{question.title}}
+                    Q: {{today_question.title}}
                 </div>
             </div>
-            <div class="answer">
-                <div class="date">
-                    2023-06-17
-                </div>
-                <div class="answerBlock">
-                    <div class="answerTitle">
-                        Q:당신이 가장 좋아하는 색은?
-                    </div>
-                    <div class="underLine"></div>
-                    <div class="answerContent">
-                        윤희의 Answer:
-                        나는 레몬색이 좋아~레레몬 레몬
-                    </div>
-                    <div class="underLine"></div>
-                    <div class="answerContent">
-                        유민의 Answer:
-                        나는 민트색이 좋아~미미민트 민트
-                    </div>
-                    <div class="underBar"></div>
-                </div>
-            </div>
+            {% if pk > 1 %}
+            <input type="button" class="upScroll" onclick="onClickToPrev()" />
+            {% endif %}
+
+            {% for p in question_list %}
             <div class="answer">
                 
                 <div class="date">
 
-                    {{question.year}}-{{question.month}}-{{question.day}}
+                    {{p.question.year}}-{{p.question.month}}-{{p.question.day}}
                 </div>
                 <div class="answerBlock">
                     <div class="answerTitle">
-                        Q:{{question.title}}
+                        Q:{{p.question.title}}
                     </div>
                     <div class="underLine"></div>
                     <div class="answerContent">
                         윤희의 Answer:
-                        {% for p in lemonAnswer %}
-                        {{p.content}}
-                        {% endfor %}
+                        {{p.lemonAnswer}}
+                        
                     </div>
                     <div class="underLine"></div>
                     <div class="answerContent">
                         유민의 Answer:
-                        {% for p in mintAnswer%}
-                        {{p.content}}
-                        {% endfor %}
+                        {{p.mintAnswer}}
+                    
                     </div>
                     <div class="underBar"></div>
                 </div>
             </div>
-            
+            {% endfor %}
+            {% if endPage %}
+            {% else %}
+            <input type="button" class="downScroll" onclick="onClickToNext()"/>
+            {% endif %} 
+            <button class="monthlybtn" onclick="onClickToCalendar()">
+                Monthly ver.
+            </button>
 
 
 
@@ -75,3 +64,17 @@
 
 
 </html>
+<script>
+    function onClickToPrev(){
+        var prevpk = Number('{{pk}}') - 1;
+        window.location.href = '/questionlist/' +prevpk;
+    }
+    function onClickToCalendar(){
+        window.location.href = '/calendar/';
+    }
+
+    function onClickToNext(){
+        var nextpk = Number('{{pk}}')+1;
+        window.location.href = '/questionlist/'+nextpk;
+    }
+</script>

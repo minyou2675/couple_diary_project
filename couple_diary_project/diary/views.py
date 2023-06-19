@@ -27,26 +27,40 @@ def showDiary(request,pk):
 
     return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary})
 
-def showQuestionList(request):
+def showQuestionList(request,pk):
+    #오늘의 질문 구하기
     month = datetime.today().month
     year = datetime.today().year
     day = datetime.today().day
+    today_question = Question.objects.get(year=year,month=month,day=day)
+    
+    #유저답변 필터링
     mintUser= User.objects.get(pk=1)
     lemonUser= User.objects.get(pk=2)
-    mintAnswer = Answer.objects.filter(author=mintUser,month=month,year=year,day=day)
-    question = Question.objects.get(year=year,month=month,day=day)
+    all_question_count = Question.objects.all().count()
+    print(all_question_count)
+    question = Question.objects.all().order_by('id')[(pk-1)*4:pk*4].values()
+    question_list = []
+    
+    #마지막 페이지 값 연산
+    endPage = True if all_question_count <= pk*4  else False
 
-   
-    lemonAnswer = Answer.objects.filter(author=lemonUser,month=month,year=year,day=day)
-    if lemonAnswer:
-        pass
-    else:
-        lemonAnswer = lemonAnswer.first()
-  
-    context = {
-               'mintAnswer' : mintAnswer,
-               'lemonAnswer' : lemonAnswer,
-               'question'   : question}
+     
+    for i in question:
+        question_id = i['id']
+        q = Question.objects.get(pk=question_id)
+        answer_list = {'question' : q ,'mintAnswer' :  '', 'lemonAnswer': ''}
+        mintAnswer = Answer.objects.filter(author=mintUser,question=q) 
+        lemonAnswer = Answer.objects.filter(author=lemonUser,question=q)
+        if mintAnswer:
+            answer_list['mintAnswer'] = mintAnswer.first().content
+        if lemonAnswer:
+            answer_list['lemonAnswer'] = lemonAnswer.first().content
+        question_list.append(answer_list)
+    print(question_list)
+            
+             
+    context = {'question_list' : question_list,'pk':pk,'endPage':endPage,'today_question':today_question}
     
     return render(request,'diary/questionlist.html',context)
 
