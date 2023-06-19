@@ -1,0 +1,92 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #bcbcbc;
+}
+
+button.mintbtn{
+    border: 0;
+    outline: 0;
+    background-color:#FFF8B6; ;
+}
+
+input.mintbtn{
+    border: 0;
+    outline: 0;
+    background-image: url('../../static/images/mint_save.svg');
+    background-repeat: no-repeat;
+}
+button.lemonbtn{
+    border: 0;
+    outline: 0;
+    background-color:#9AE9DB; ;
+}
+
+.upperside{
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width:348px;
+    height:384px;
+    background-color: #FFF8B6;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26.48px;
+    color:#9AE9DB;
+}
+
+.downside{
+    display: flex;
+    position:relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width:348px;
+    height:384px; 
+    background-color: #9AE9DB;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26.48px;
+    color:#FFF8B6;
+}
+
+.question{
+    margin-top: 324px;
+    margin-left:18px;
+    margin-right:18px;
+    position:absolute;
+    text-align: center;
+    width:311px;
+    height:136px;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    align-items:center;
+    z-index: 1;
+}
+
+textarea.answerform{
+    margin-top:31px;
+    margin-left:17px;
+    margin-right:18px;
+    width : 313px;
+    height: 211px;
+    border: 3px dashed #D9D9D9;
+}
+
+
+
+.footer{
+    margin-top:3px;
+    margin-left:133px;
+    margin-right:133px;
+    text-align: center;
+    width:93px;
+    height:16px;
+    color : #9AE9DB
+}

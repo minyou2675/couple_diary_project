@@ -1,0 +1,134 @@
+
+
+input{
+    border:0 solid black;
+    background-color: transparent;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+  }
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #9AE9DB;
+    border: 1px solid #bcbcbc;
+}
+
+#yearmonth{
+    margin-top: 28px;
+    margin-left: 12px;
+    margin-right: 156px;
+    width: 180px;
+    height: 32px;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 42.37px;
+    color: #FFF8B6;
+  
+}
+
+#dday{
+    margin-top: 6px;
+    margin-left: 6px;
+    margin-right: 213px;
+    width: 129px;
+    height: 24px;
+    font-weight: 400;
+    font-size: 24px;
+    color: #FFFFFF;
+
+}
+
+.calandarMove{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-left:89px;
+    margin-right:90px; 
+    width: 181px;
+    height: 24px;
+ 
+
+}
+
+input.move{
+    margin-left: 18px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.54px;
+    color:#FFFFFF;
+}
+
+.calandar{
+    display: flex;
+    flex-direction: column;
+    width: 337px;
+    height: 539px;
+    
+}
+
+.col-7{
+    display: flex;
+    flex-direction: row;
+    width:360px;
+    height: 100px;
+    background-color: #FFF8B6;
+    border-width: 1px;
+    border-bottom: #C0BEA5;
+    /* align-items: center; */
+}
+.day{
+    width:100px;
+    height:auto;
+    border: 1px solid #C0BEA5;
+    padding: 0 0 0 5px;
+}
+
+.btnSide{
+    display: flex;
+    flex-direction: row;
+    width: 333px;
+    height: 29px;
+    
+}
+
+
+.questionList{
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width:25px;
+    height:21px;
+}
+.dailyBtn{
+    margin-right: 9px;
+    margin-left: 248px;
+    width:91px;
+    height:29px;
+    background-color: #F6FAF9;
+    border-radius:30px;
+    border: 0px solid;
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #9AE9DB;
+    z-index:1;
+}
+
+.footer{
+    margin-top:56px;
+    margin-left:120px;
+    margin-right:133px;
+    text-align: center;
+    width:93px;
+    height:16px;
+    color : #FFF8B6;
+}

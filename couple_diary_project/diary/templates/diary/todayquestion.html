@@ -14,13 +14,13 @@
             {% if mintAnswer %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickNext()">
 
-                <img  src="../../static/images/mint_heart.svg"/>
+                <img  src="{% static 'images/mint_heart.svg' %}"/>
             </button>
                 <div id="mintletter" style="margin: 0 auto;">Completed</div>
             {% else %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
 
-                <img  src="../../static/images/mint_heart.svg"/>
+                <img  src="{%static 'images/mint_heart.svg' %}"/>
             </button>
             <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
             {% endif %}
@@ -39,7 +39,7 @@
                 <div id="lemonletter" style="margin: 0 auto;">Completed</div>
             {% else %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickQuestion2()">
-                <img  src="{% static images/lemon_heart.svg %}"/>
+                <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
             <div id="lemonletter" style="margin: 0 auto;">Click to start writing</div>
             {% endif %}

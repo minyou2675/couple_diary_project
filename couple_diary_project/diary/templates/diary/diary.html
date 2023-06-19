@@ -1,22 +1,28 @@
 <html>
     <head>
         {% load static %}
-        <link rel="stylesheet" href="{% static 'css/dailydiary.css '%}">
+        <link rel="stylesheet" href="{% static 'css/dailydiary.css' %}">
         </head>
 <body>    
+    
 <div class="wrapper">
     {% if lemonDiary %}
     <div class="uppersideV2">
-        {% for p in lemonDiary %}
-        {% if p.image %}
-        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
+        <div style="width:200px; height:310px; margin-top:10px; background-color:#D9D9D9;">
+        
+        {% if lemonDiary.image %}
+        <img style="width:195px; height:300px;"src='{{lemonDiary.image.url}}' alt="이미지 없음"/> 
         {% endif %}
-        <div>
-            <h5>{{p.title}}</h5>
-            {{p.content}}
+         </div>
+        <div style="width:154px; margin-left:10px;">
+            <a  class="mintEdit" href="{{ lemonDiary.get_absolute_url }}">
+                <img src="{% static 'images/mint_edit.svg' %}" alt="example image"> 
+            </a>
+
+            <h5>{{lemonDiary.title}}</h5>
+            {{lemonDiary.content}}
         </div>
 
-    {% endfor %}
 </div>
     {% else %}
     <div class="upperside">
@@ -29,30 +35,35 @@
         Monthly ver.
     </button>
    
-        {% if  mintDiary %}
-        <div class="downsideV2">
-            <div id="dday">
-            </div>
-        {% for p in mintDiary %}
-        {% if p.image %}
-        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
-        {% endif %}
-        <div>
-            <h5>{{p.title}}</h5>
-            {{p.content}}
+        
+    {% if  mintDiary %}
+    <div class="downsideV2">
+        <div id="dday">
         </div>
+        <div style="display:flex;flex-direction:row;width:200px; height:310px; background-color:#D9D9D9;">
+            {% if mintDiary.image %}
+            <img style="width:195px; height:300px;"src='{{mintDiary.image.url}}' alt="이미지 없음"/>
+            {% endif %}
+            <div style="width:154px; margin-left:10px;">
+                <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
+                    <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
+                </a>
+                <h5>{{mintDiary.title}}</h5>
+                {{mintDiary.content}}
+            </div>       
         </div>
-        {% endfor %}
+    </div>
+   
         {% else %}
         <div class="downside">
             <div id="dday">
             </div>
-    
+        </div>
         {% endif %}
-    </div>
-    <div class="footer">
+    
+    <!-- <div class="footer">
         YOUNHEE&YUMIN
-    </div>
+    </div> -->
 
     </div>
 </body>

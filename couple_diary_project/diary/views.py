@@ -16,9 +16,9 @@ def index(request):
 def diaryUpdate(request,pk):
     user = request.user
     diary = get_object_or_404(Diary,pk=pk)
-    if user != diary.author:
-            messages.error(request, '수정권한이 없습니다')
-            return redirect('/dailydiary')
+    # if user != diary.author:
+    #         messages.error(request, '수정권한이 없습니다')
+    #         return redirect('/dailydiary')
     if request.method == 'POST':  
         title = request.POST['title']
         image = request.FILES.get('chooseFile') if request.FILES.get('chooseFile') is not None else None
@@ -42,6 +42,12 @@ def showDiary(request,pk):
     lemonUser = User.objects.get(pk=2)
     mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
     lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
+
+    if mintDiary:
+        mintDiary = mintDiary.last()
+    if lemonDiary:
+        lemonDiary = lemonDiary.last()
+
 
     return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary})
 
