@@ -11,6 +11,7 @@ urlpatterns = [
     path('diarycreate/<int:pk>/',views.showDiaryCreate),
     path('questionlist/<int:pk>',views.showQuestionList),
     path('diary/<int:pk>',views.showDiary),
+    path('diaryupdate/<int:pk>',views.diaryUpdate),
     
     
 ]

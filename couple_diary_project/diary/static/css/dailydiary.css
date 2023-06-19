@@ -1,3 +1,9 @@
+input{
+    border:0 solid black;
+    background-color: transparent;
+}
+
+
 .wrapper{
     display: flex;
     flex-direction: column;
@@ -25,8 +31,8 @@ button.lemonbtn{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width:348px;
-    height:384px;
+    width:360px;
+    height:390px;
     background-color: #FFF8B6;
     font-weight: 400;
     font-size: 20px;
@@ -37,9 +43,9 @@ button.lemonbtn{
 .uppersideV2{
     display: flex;
     position:relative;
-    flex-direction: row;
-    width:348px;
-    height:384px;
+    /* flex-direction: row; */
+    width:360px;
+    height:390px;
     background-color: #FFF8B6;
     font-weight: 400;
     font-size: 20px;
@@ -94,8 +100,8 @@ button.lemonbtn{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width:348px;
-    height:384px; 
+    width:360px;
+    height:390px; 
     background-color: #9AE9DB;
     font-weight: 400;
     font-size: 20px;
@@ -104,30 +110,35 @@ button.lemonbtn{
 }
 
 .downsideV2 {
-    /* display: flex; */
-    position:relative;
-    flex-direction: row;
-    width:348px;
-    height:384px;
-    background-color: #9AE9DB;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 26.48px;
-    color:#FFF8B6;
+
+display: flex;
+
+position:relative;
+
+flex-direction: column;
+
+width: 360px;
+
+height:390px;
+
+background-color: #9AE9DB;
+
+font-weight: 400;
+
+font-size: 20px;
+
+line-height: 26.48px;
+
+color:#FFF8B6;
+
+flex-direction: column;
 }
 #dday{
-    margin-top: 6px;
-    margin-left: 6px;
-    margin-right: 213px;
-    width: 129px;
-    height: 24px;
     font-weight: 400;
     font-size: 24px;
     color: #FFFFFF;
     z-index: 1;
 }
-
-div#dday {}
 
 .monthlybtn{
     margin-top: 369px;
@@ -153,6 +164,19 @@ div#dday {}
     margin-right:133px;
     text-align: center;
     width:93px;
-    height:16px;
+    height:8px;
     color : #9AE9DB
+}
+
+a.mintEdit{
+    margin-top:10px;
+    margin-left: 120px;
+    margin-right:9px;
+
+}
+a.lemonEdit{
+    margin-top: 0px;
+    margin-right: 314px;
+    margin-left: 110px;
+
 }

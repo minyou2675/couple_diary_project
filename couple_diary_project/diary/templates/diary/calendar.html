@@ -1,6 +1,7 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../../static/css/calandar.css"/>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/calendar.css' %}"/>
     </head>
     <body>
     <div class="wrapper">
@@ -22,10 +23,10 @@
                 {% for day in week.week %}
                 <div class="day"><a href="/diary/{{year}}{{month}}{{day.day}}">{{day.day}}
                     </a>
-                {% if day.diary == 2 %}
-                <img src="../../static/images/full_heart.svg">
+                {% if day.diary >= 2 %}
+                <img src="{% static 'images/full_heart.svg' %}">
                 {% elif day.diary == 1 %}
-                <img src="../../static/images/empty_heart.svg">
+                <img src="{% static 'images/empty_heart.svg' %}">
                 {% else %}
                 {% endif %}
                 </div>
@@ -35,7 +36,7 @@
             </div>
 
         <button class="questionList" onclick="onClickToList()">
-            <img src="../../static/images/question_list.svg">
+            <img src="{% static 'images/question_list.svg' %}">
         </button>
 
         <button class="dailyBtn" onclick="onClickToDiary()">

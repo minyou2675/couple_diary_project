@@ -1,16 +1,34 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from datetime import datetime
 from django.http import JsonResponse
 from calendar import monthcalendar,monthrange 
 import random
+from django.contrib import messages
 
 
 # Create your views here.
 
 def index(request):
     return render(request,'diary/index.html')
+
+def diaryUpdate(request,pk):
+    user = request.user
+    diary = get_object_or_404(Diary,pk=pk)
+    if user != diary.author:
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('/dailydiary')
+    if request.method == 'POST':  
+        title = request.POST['title']
+        image = request.FILES.get('chooseFile') if request.FILES.get('chooseFile') is not None else None
+        content = request.POST['content']
+        diary.title = title
+        diary.image = image
+        diary.content = content
+        diary.save()
+        return redirect('diary:dailydiary')
+    return render(request,'diary/diaryupdate.html',{'user':user})
 
 def showDiary(request,pk):
     date = str(pk)
@@ -39,7 +57,7 @@ def showQuestionList(request,pk):
     lemonUser= User.objects.get(pk=2)
     all_question_count = Question.objects.all().count()
     print(all_question_count)
-    question = Question.objects.all().order_by('id')[(pk-1)*4:pk*4].values()
+    question = Question.objects.all().order_by('-id')[(pk-1)*4:pk*4].values()
     question_list = []
     
     #마지막 페이지 값 연산
@@ -115,7 +133,11 @@ def showDailyDiary(request):
     lemonUser = User.objects.get(pk=2)
 
     mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
+    if mintDiary:
+        mintDiary = mintDiary.last()
     lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
+    if lemonDiary:
+        lemonDiary = lemonDiary.last()
       
     context = {'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
     return render(request, 'diary/dailydiary.html',context)

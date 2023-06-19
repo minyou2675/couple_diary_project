@@ -4,7 +4,8 @@
 
 <head>
     <title>Blog</title>
-        <link rel="stylesheet" href="../../static/css/main.css" media="screen">
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" media="screen">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="refresh" content="3; url=/dailyquestion"> 
 
@@ -16,7 +17,7 @@
         LOVE MEMORY DIARY
     </div>
     <div class="box">
-        <img class="mainHeart" src="../../static/images/main_heart.svg">
+        <img class="mainHeart" src="{% static 'images/main_heart.svg' %}">
     </div>
     <div class="name">
         YOUNHEE&YUMIN

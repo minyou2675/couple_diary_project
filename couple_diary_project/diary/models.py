@@ -15,6 +15,12 @@ class Diary(models.Model):
     year = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def get_absolute_url(self):
+        return f'/diaryupdate/{self.pk}'
+    def __str__(self):
+        return f'{self.pk}-{self.title}'
+    
 
 class Schedule(models.Model):
     year = models.IntegerField()
@@ -31,16 +37,20 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return f'{self.pk}-{self.title}'
+
+
 class Answer(models.Model):
     question = models.ForeignKey(Question, related_name='question_answer',on_delete=models.CASCADE)
     author = models.ForeignKey(User, null=False, related_name='user_answer', on_delete=models.CASCADE)
-    content = models.TextField()
     content = models.TextField()
     day = models.IntegerField()
     month = models.IntegerField()
     year = models.IntegerField()
     
-    
+    def __str__(self):
+        return f'{self.pk}-{self.author}-{self.content}'
     
 
 # Create your models here.

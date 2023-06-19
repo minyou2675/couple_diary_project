@@ -3,7 +3,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/diarycreate.css' %}">
 </head>
-{% if user == 'lemon' %}
+{% if user.pk == 2 %}
 <div class="wrapper">
 
 <div id="yearmonth"></div>
@@ -12,7 +12,6 @@
     <div class="photo">
         <div class="photoUpload">
             <div  id="image-show">
-
             </div>
         <label for="chooseFile">
             Upload Picture
@@ -29,7 +28,7 @@
     YOUNHEE&YUMIN
 </div>
 </div>
-{% elif user == 'user' %}
+{% elif user.pk == 1 %}
 <div class="wrapper" style="background-color: #9AE9DB;">
 
     <div id="yearmonth" style="color: #FFF8B6;"></div>

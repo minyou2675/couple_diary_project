@@ -1,12 +1,13 @@
 <html>
     <head>
-        <link rel="stylesheet" href="../../static/css/dailydiary.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/dailydiary.css '%}">
         </head>
 <body>    
 <div class="wrapper">
-    {% if mintDiary %}
+    {% if lemonDiary %}
     <div class="uppersideV2">
-        {% for p in mintDiary %}
+        {% for p in lemonDiary %}
         {% if p.image %}
         <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
         {% endif %}
@@ -28,11 +29,11 @@
         Monthly ver.
     </button>
    
-        {% if  lemonDiary %}
+        {% if  mintDiary %}
         <div class="downsideV2">
             <div id="dday">
             </div>
-        {% for p in lemonDiary %}
+        {% for p in mintDiary %}
         {% if p.image %}
         <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
         {% endif %}

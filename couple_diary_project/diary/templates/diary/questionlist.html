@@ -1,7 +1,8 @@
 <html>
     <head>
+        {% load static %}
 
-        <link rel="stylesheet" href="../../static/css/questionlist.css">
+        <link rel="stylesheet" href="{% static 'css/questionlist.css' %}">
 
     </head>
     <body>
@@ -19,6 +20,7 @@
             {% endif %}
 
             {% for p in question_list %}
+      
             <div class="answer">
                 
                 <div class="date">
