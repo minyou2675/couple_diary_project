@@ -3,7 +3,7 @@ from .models import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from datetime import datetime
 from django.http import JsonResponse
-from calendar import monthcalendar  
+from calendar import monthcalendar,monthrange 
 import random
 
 
@@ -49,6 +49,8 @@ def showQuestionList(request):
                'question'   : question}
     
     return render(request,'diary/questionlist.html',context)
+
+
     
     
 
@@ -102,6 +104,33 @@ def showDailyDiary(request):
     lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
     context = {'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
     return render(request, 'diary/dailydiary.html',context)
+
+def moveCalendar(request,pk):
+    date = str(pk)
+    date = datetime.strptime(date,"%Y%m")
+    year = date.year
+    month = date.month   
+    calendar = monthcalendar(year,month) 
+    month_calendar = []
+    for week in calendar:   
+        week_diary = []
+        for day in week:
+            if day == 0:
+                 week_diary.append({'day' : ' ' , 'diary' : 0})
+            else:
+                schedule = Schedule.objects.filter(year=year,month=month,day=day)
+                if schedule:
+                    diary_count = schedule.first().diary
+                    week_diary.append({'day' : day  ,'diary' : diary_count})
+                else:
+                    week_diary.append({'day' : day , 'diary' : 0})
+        month_calendar.append({'week':week_diary,'year' : year,'month':month})
+    print(month_calendar)
+                         
+        
+    return render(request,'diary/calandar.html',{'calendar':month_calendar,'year':year,'month':month})
+
+    print(date)
 
 def showCalandar(request):
     year = datetime.today().year
