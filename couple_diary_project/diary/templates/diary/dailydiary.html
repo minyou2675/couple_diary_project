@@ -4,54 +4,51 @@
         </head>
 <body>    
 <div class="wrapper">
+    {% if mintDiary %}
+    <div class="uppersideV2">
+        {% for p in mintDiary %}
+        {% if p.image %}
+        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
+        {% endif %}
+        <div>
+            <h5>{{p.title}}</h5>
+            {{p.content}}
+        </div>
+
+    {% endfor %}
+</div>
+    {% else %}
     <div class="upperside">
-        {% if mintDiary %}
-
-        <div class="diary">
-
-            {% for p in mintDiary %}
-            <div style="width: 160px; height:317px;">
-        <img  style="width: 160px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}'/>
-    </div>
-        <div class="diary-contents">
-            <!-- <div class="diary-title">{{p.title}}</div>
-
-        <p>{{p.content | linebreaksbr}}</p> -->
-        <h5 style="font-size: 15px;">TITLE : {{p.title}}</h5>
-        <span style="font-size:15px;">{{p.content}}</span>
-    </div>
-    </div>
-        {% endfor %}
-        {% else %}
         <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickToMintDiaryCreate()">
         <img  src="../../static/images/mint_heart.svg"/>
     </button>
         <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
-        {% endif %}
         <div id="yearmonth">2023 MAY</div>
     </div>
+    {% endif %}
     
     <button class="monthlybtn" onclick="onClickToCalendar()">
         Monthly ver.
     </button>
-    <div class="downside">
-        <div id="dday">
-        </div>
+   
         {% if  lemonDiary %}
-            {% for p in lemonDiary %}
-            <div class="diary">
-                <div style="width: 160px; height:317px;">
-                    {% if p.image %}
-            <img  style="width: 160px; height:317px; margin-right:150px; margin-left:10px; margin-top:26px; " src='{{p.image.url}}' alt="이미지가 없습니다."/>
-                    {% else %}
-                    {% endif %}
+        <div class="downsideV2">
+            <div id="dday">
+            </div>
+        {% for p in lemonDiary %}
+        {% if p.image %}
+        <img style="width:195px; height:327px;"src='{{p.image.url}}' alt="이미지 없음"/>
+        {% endif %}
+        <div>
+            <h5>{{p.title}}</h5>
+            {{p.content}}
         </div>
-            <div class="diary-contents">
-                <div class="diary-title">{{p.title}}</div>
-    
-            <p>{{p.content | linebreaksbr}}</p>
-            {% endfor %}
+        </div>
+        {% endfor %}
         {% else %}
+        <div class="downside">
+            <div id="dday">
+            </div>
         <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickToLemonDiaryCreate()">
         <img  src="../../static/images/lemon_heart.svg"/>
     </button>
