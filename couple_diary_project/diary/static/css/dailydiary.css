@@ -110,34 +110,27 @@ button.lemonbtn{
 }
 
 .downsideV2 {
-
-display: flex;
-
-position:relative;
-
-flex-direction: column;
-
-width: 360px;
-
-height:390px;
-
-background-color: #9AE9DB;
-
-font-weight: 400;
-
-font-size: 20px;
-
-line-height: 26.48px;
-
-color:#FFF8B6;
-
-flex-direction: column;
+display: flex;
+position:relative;
+flex-direction: row;
+width: 360px;
+height:390px;
+background-color: #9AE9DB;
+font-weight: 400;
+font-size: 20px;
+line-height: 26.48px;
+color:#FFF8B6;
+/* flex-direction: column; */
 }
 #dday{
+    width: 360px;
     font-weight: 400;
     font-size: 24px;
     color: #FFFFFF;
-    z-index: 1;
+    /* z-index: 1; */
+    height: 32px;
+    text-align: justify;
+    background-color: #9AE9DB;
 }
 
 .monthlybtn{

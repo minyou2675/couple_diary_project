@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
+from users.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from datetime import datetime,timedelta
 from django.http import JsonResponse
@@ -43,8 +44,14 @@ def showDiary(request,pk):
     month = date.month
     day = date.day
     print(day,month,year)
-    mintUser = User.objects.get(pk=1)
-    lemonUser = User.objects.get(pk=2)
+    user = request.user
+    partner = User.objects.filter(email=user.partner).first()
+    if user.color == 'mint':
+        mintUser = request.user
+        lemonUser = partner
+    else:
+        lemonUser = request.user
+        mintUser = partner
     mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
     lemonDiary = Diary.objects.filter(author=lemonUser,year=year,month=month,day=day)
 
@@ -54,7 +61,7 @@ def showDiary(request,pk):
         lemonDiary = lemonDiary.last()
 
 
-    return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary})
+    return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary,'year':year,'month':month,'user':user})
 
 def showQuestionList(request,pk):
     #오늘의 질문 구하기
@@ -64,8 +71,15 @@ def showQuestionList(request,pk):
     today_question = Question.objects.get(year=year,month=month,day=day)
     
     #유저답변 필터링
-    mintUser= User.objects.get(pk=1)
-    lemonUser= User.objects.get(pk=2)
+    user = request.user
+    partner = User.objects.filter(email=user.partner).first()
+    if user.color == 'mint':
+        mintUser = request.user
+        lemonUser = partner
+    else:
+        lemonUser = request.user
+        mintUser = partner
+    
     all_question_count = Question.objects.all().count()
     print(all_question_count)
     question = Question.objects.all().order_by('-id')[(pk-1)*4:pk*4].values()
@@ -116,7 +130,7 @@ def showDiaryCreate(request,pk):
         return render(request, 'diary/diarycreate.html',{'user' : user})
     elif request.method == 'POST':
         # author = request.user
-        author = User.objects.get(pk=pk)
+        author = request.user
         if request.FILES.get('chooseFile') is not None:
             image = request.FILES.get('chooseFile')
         else:
@@ -140,8 +154,23 @@ def showDailyDiary(request):
     year = datetime.today().year
     day = datetime.today().day
 
-    mintUser = User.objects.get(pk=1)
-    lemonUser = User.objects.get(pk=2)
+    # mintUser = User.objects.get(pk=1)
+    # lemonUser = User.objects.get(pk=2)
+    
+    #유저 값 받아오기
+    user = request.user
+    partner = User.objects.filter(email=user.partner)
+    
+    if partner:
+        partner = partner.first()
+
+    if user.color == 'mint':
+        mintUser = user
+        lemonUser = partner
+    else:
+        lemonUser = user
+        mintUser = partner
+        
 
     mintDiary = Diary.objects.filter(author=mintUser,year=year,month=month,day=day)
     if mintDiary:
@@ -206,8 +235,19 @@ def showCalendar(request,pk):
 
     
 def showQuestion(request):
-    mintUser = User.objects.get(pk=1)
-    lemonUser = User.objects.get(pk=2)
+    user = request.user
+    partner = User.objects.filter(email=user.partner)
+    
+    #파트너 계정이 존재한다면, 단일 객체를 불러옴 
+    if partner:
+        partner = partner.first()
+    if user.color == 'mint':
+        mintUser = user
+        lemonUser = partner
+    else:
+        lemonUser = user
+        mintUser = partner
+    
     year = datetime.today().year
     month = datetime.today().month
     day = datetime.today().day
@@ -237,8 +277,7 @@ def saveAnswer(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        user = request.POST.get('userpk')
-        user = User.objects.get(pk=user)
+        user = request.user
         day = request.POST.get('day')
         year = request.POST.get('year')
         month = request.POST.get('month')

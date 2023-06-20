@@ -1,11 +1,18 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from .models import User
+from django.contrib.auth import authenticate 
+class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['username','password']
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("유효하지 않은 아이디 또는 비밀번호 입니다.")
 
 class SignUpForm(forms.ModelForm):
     # username = forms.CharField(max_length=150,widget=forms.TextInput(attrs={'class':'SignUpForm'}))
