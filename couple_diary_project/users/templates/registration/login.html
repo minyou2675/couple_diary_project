@@ -1,0 +1,25 @@
+<html>
+   
+    <head>
+        <title>
+            Login
+        </title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <form method="post">{% csrf_token %}
+                <div class="field">
+            {{form}}
+        </div>
+
+            <input class="submit" type="submit" placeholder="" value="" >
+     
+        </form>
+
+
+        </div>
+    </body>
+</html>
