@@ -68,6 +68,11 @@
 
     
           //새로운 이미지 div 추가
+        var originImage = document.getElementsByClassName('img')[0];
+        if(originImage){
+            originImage.remove()
+        }
+       
         var newImage = document.createElement("img");
         newImage.setAttribute("class", 'img');
     

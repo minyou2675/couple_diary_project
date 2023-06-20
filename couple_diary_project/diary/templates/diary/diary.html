@@ -37,21 +37,21 @@
    
         
     {% if  mintDiary %}
+    <div id="dday"></div>
     <div class="downsideV2">
-        <div id="dday">
-        </div>
+        
         <div style="display:flex;flex-direction:row;width:200px; height:310px; background-color:#D9D9D9;">
             {% if mintDiary.image %}
             <img style="width:195px; height:300px;"src='{{mintDiary.image.url}}' alt="이미지 없음"/>
-            {% endif %}
-            <div style="width:154px; margin-left:10px;">
-                <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
-                    <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
-                </a>
-                <h5>{{mintDiary.title}}</h5>
-                {{mintDiary.content}}
-            </div>       
+            {% endif %}  
         </div>
+        <div style="width:154px; margin-left:10px;">
+            <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
+                <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
+            </a>
+            <h5>{{mintDiary.title}}</h5>
+            {{mintDiary.content}}
+        </div>     
     </div>
    
         {% else %}
@@ -90,6 +90,7 @@
     const renderDate = () => {
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth()+1;
+        const viewDay = '{{day}}';
         const monthList = {1 : 'JAN', 2 : 'FEB', 3 : 'MAR', 4 : 'APR', 5 : 'MAY', 6 : 'JUN', 7 : 'JUL',
                             8 : 'AUG', 9: 'SEP', 10 : 'OCT', 11: 'NOV', 12 : 'DEC'};
         const todayMonth = monthList[viewMonth.toString()];
@@ -98,7 +99,7 @@
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
-        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth;
+        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth+' '+viewDay;
         document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
 
     }

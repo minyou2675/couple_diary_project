@@ -3,15 +3,16 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/diarycreate.css' %}">
 </head>
-{% if user.pk == 2 %}
+{% if user.color == 'lemon' %}
 <div class="wrapper">
 
 <div id="yearmonth"></div>
 <div id="dday"></div>
-<form id="diaryForm" method="post" action="/diarycreate/1/" enctype="multipart/form-data">
+<form id="diaryForm" method="post" enctype="multipart/form-data">
     <div class="photo">
         <div class="photoUpload">
             <div  id="image-show">
+                <img class='img' src="{{diary.image.url}}" style="width: 90%; height: 90%; margin-top:10px;">
             </div>
         <label for="chooseFile">
             Upload Picture
@@ -19,8 +20,8 @@
     </div>
     </div>
     <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"/>
-    <input type="text" id="diaryTitle" name="diaryTitle" placeholder="Title"/>
-    <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="Write Content"></textarea>
+    <input type="text" id="diaryTitle" name="diaryTitle" value="{{diary.title}}"/>
+    <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="">{{diary.content}}</textarea>
     <input type="submit" placeholder="" value="" id="diarySubmit"/>
     {% csrf_token %}
 </form>
@@ -28,16 +29,16 @@
     YOUNHEE&YUMIN
 </div>
 </div>
-{% elif user.pk == 1 %}
+{% elif user.color == 'mint' %}
 <div class="wrapper" style="background-color: #9AE9DB;">
 
     <div id="yearmonth" style="color: #FFF8B6;"></div>
     <div id="dday" style="color : #F5F5F5;"></div>
-    <form id="diaryForm" method="post" action="/diarycreate/2/" enctype="multipart/form-data">
+    <form id="diaryForm" method="post"  enctype="multipart/form-data">
         <div class="photo">
             <div class="photoUpload">
                 <div  id="image-show" style="width:160px;">
-    
+                    <img class='img' src="{{diary.image.url}}" style="width: 90%; height: 90%; margin-top:10px;">
                 </div>
             <label for="chooseFile">
                 Upload Picture
@@ -45,8 +46,8 @@
         </div>
         </div>
         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"/>
-        <input type="text" id="diaryTitle" name="diaryTitle" placeholder="Title"/>
-        <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="Write Content"></textarea>
+        <input type="text" id="diaryTitle" name="diaryTitle" value="{{diary.title}}"/>
+        <textarea id="diaryContent" form="diaryForm" name="diaryContent" placeholder="">{{diary.content}}</textarea>
         <input type="submit" placeholder="" value="" id="diarySubmit2"/>
         {% csrf_token %}
     </form>
@@ -64,11 +65,17 @@
     function loadFile(input) {
         var file = input.files[0];	//선택된 파일 가져오기
     
+        //기존 이미지 삭제
+        var originImage = document.getElementsByClassName('img')[0];
+        if(originImage){
+            originImage.remove();
+        }
 
     
           //새로운 이미지 div 추가
         var newImage = document.createElement("img");
         newImage.setAttribute("class", 'img');
+
     
         //이미지 source 가져오기
         newImage.src = URL.createObjectURL(file);   
@@ -78,6 +85,7 @@
         newImage.style.marginTop = "10px";
     
         //이미지를 image-show div에 추가
+    
         var container = document.getElementById('image-show');
     
         container.appendChild(newImage);

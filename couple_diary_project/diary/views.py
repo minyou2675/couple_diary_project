@@ -21,20 +21,18 @@ def index(request):
 
 def diaryUpdate(request,pk):
     user = request.user
-    diary = get_object_or_404(Diary,pk=pk)
-    # if user != diary.author:
-    #         messages.error(request, '수정권한이 없습니다')
-    #         return redirect('/dailydiary')
-    if request.method == 'POST':  
-        title = request.POST['title']
+    diary = get_object_or_404(Diary,author=user,pk=pk)
+    if request.method == 'POST': 
+        print("diary",diary) 
+        title = request.POST['diaryTitle']
         image = request.FILES.get('chooseFile') if request.FILES.get('chooseFile') is not None else None
-        content = request.POST['content']
+        content = request.POST['diaryContent']
         diary.title = title
         diary.image = image
         diary.content = content
         diary.save()
-        return redirect('diary:dailydiary')
-    return render(request,'diary/diaryupdate.html',{'user':user})
+        return redirect('/dailydiary/')
+    return render(request,'diary/diaryupdate.html',{'user':user,'diary':diary})
 
 def showDiary(request,pk):
     date = str(pk)
@@ -61,7 +59,8 @@ def showDiary(request,pk):
         lemonDiary = lemonDiary.last()
 
 
-    return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary,'year':year,'month':month,'user':user})
+    return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary,'year':year,'month':month,
+                                                      'day':day,'user':user})
 
 def showQuestionList(request,pk):
     #오늘의 질문 구하기
@@ -179,7 +178,7 @@ def showDailyDiary(request):
     if lemonDiary:
         lemonDiary = lemonDiary.last()
       
-    context = {'year':year,'month':month,'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
+    context = {'year':year,'month':month,'day':day,'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
     return render(request, 'diary/dailydiary.html',context)
 
 def showCalendar(request,pk):

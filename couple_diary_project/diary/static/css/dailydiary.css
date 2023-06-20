@@ -85,7 +85,6 @@ button.lemonbtn{
     margin-left: 6px;
     margin-right: 190px;
     position: absolute;
-    width: 180px;
     height: 32px;
     font-size: 32px;
     font-weight: 400;
@@ -110,17 +109,28 @@ button.lemonbtn{
 }
 
 .downsideV2 {
-display: flex;
-position:relative;
-flex-direction: row;
-width: 360px;
-height:390px;
-background-color: #9AE9DB;
-font-weight: 400;
-font-size: 20px;
-line-height: 26.48px;
-color:#FFF8B6;
-/* flex-direction: column; */
+
+display: flex;
+
+position:relative;
+
+flex-direction: row;
+
+width: 360px;
+
+height:390px;
+
+background-color: #9AE9DB;
+
+font-weight: 400;
+
+font-size: 20px;
+
+line-height: 26.48px;
+
+color:#FFF8B6;
+
+/* flex-direction: column; */
 }
 #dday{
     width: 360px;
