@@ -89,8 +89,11 @@
     }
     
     const renderDate = () => {
-
-        const diffDay= date - first;
+        var year = Number('{{year}}');
+        var month = Number('{{month}}')-1;
+        var day = Number('{{day}}')
+        const curDate = new Date(year,month,day)
+        const diffDay= curDate - first;
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
