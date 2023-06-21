@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 # from django.contrib.auth.models import User
 
@@ -9,7 +10,7 @@ class Diary(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
     image = models.ImageField(upload_to='diary/images/%Y/%m/%d/', null=True, blank=True)
-    author = models.ForeignKey(User, related_name='user_diary',null=False,on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_diary',null=False,on_delete=models.CASCADE)
     day = models.IntegerField()
     month = models.IntegerField()
     year = models.IntegerField()
@@ -27,7 +28,7 @@ class Schedule(models.Model):
     month = models.IntegerField()
     day = models.IntegerField()
     # diary = models.ForeignKey(Diary,null=True, on_delete=models.CASCADE)
-    diary = models.IntegerField()
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     
 class Question(models.Model):
     title = models.CharField(max_length=80)
@@ -43,7 +44,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, related_name='question_answer',on_delete=models.CASCADE)
-    author = models.ForeignKey(User, null=False, related_name='user_answer', on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, related_name='user_answer', on_delete=models.CASCADE)
     content = models.TextField()
     day = models.IntegerField()
     month = models.IntegerField()

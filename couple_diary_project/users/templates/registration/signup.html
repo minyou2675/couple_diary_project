@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <form method='post'> {% csrf_token %}
+            <div class="field">
+        {{form}}
+    </div>
+
+        <input class="submit" type="submit" value="" placeholder="">
+      
+
+    </form>
+
+    </div>
+    
+</body>
+</html>

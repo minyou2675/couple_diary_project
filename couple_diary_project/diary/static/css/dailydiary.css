@@ -85,7 +85,6 @@ button.lemonbtn{
     margin-left: 6px;
     margin-right: 190px;
     position: absolute;
-    width: 180px;
     height: 32px;
     font-size: 32px;
     font-weight: 400;
@@ -115,7 +114,7 @@ display: flex;
 
 position:relative;
 
-flex-direction: column;
+flex-direction: row;
 
 width: 360px;
 
@@ -131,13 +130,17 @@ line-height: 26.48px;
 
 color:#FFF8B6;
 
-flex-direction: column;
+/* flex-direction: column; */
 }
 #dday{
+    width: 360px;
     font-weight: 400;
     font-size: 24px;
     color: #FFFFFF;
-    z-index: 1;
+    /* z-index: 1; */
+    height: 32px;
+    text-align: justify;
+    background-color: #9AE9DB;
 }
 
 .monthlybtn{

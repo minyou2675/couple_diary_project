@@ -5,11 +5,16 @@ input{
     background-color: transparent;
 }
 
-a{
+.day > a{
     text-decoration: none;
     color: black;
   }
-
+.logout > a{
+    text-decoration: none;
+    margin-left: 240px;
+    font-size: 24px;
+    color:#FFF8B6;
+}
 .wrapper{
     display: flex;
     flex-direction: column;
@@ -22,16 +27,15 @@ a{
 }
 
 #yearmonth{
-    margin-top: 28px;
-    margin-left: 12px;
-    margin-right: 156px;
-    width: 180px;
+    /* margin-top: 28px; */
+    margin-left: 5px;
+    /* margin-right: 156px; */
+    /* width: 180px; */
     height: 32px;
     font-size: 32px;
     font-weight: 400;
     line-height: 42.37px;
     color: #FFF8B6;
-  
 }
 
 #dday{
@@ -99,6 +103,10 @@ input.move{
     
 }
 
+.weekDays > span {
+     margin-right:20px;
+}
+
 
 .questionList{
     border: 0;
@@ -108,23 +116,18 @@ input.move{
     height:21px;
 }
 .dailyBtn{
-    margin-right: 9px;
     margin-left: 248px;
-    width:91px;
-    height:29px;
     background-color: #F6FAF9;
     border-radius:30px;
     border: 0px solid;
     text-align: center;
     font-weight: 400;
-    font-size: 12px;
     line-height: 16px;
     color: #9AE9DB;
     z-index:1;
 }
 
 .footer{
-    margin-top:56px;
     margin-left:120px;
     margin-right:133px;
     text-align: center;

@@ -2,6 +2,7 @@
     <head>
         {% load static %}
     <link rel="stylesheet" href="{% static 'css/todayquestion.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
@@ -11,18 +12,27 @@
 
                 <img  src="../../static/images/mint_heart.svg"/>
             </button> -->
-            {% if mintAnswer %}
+            {% if lemonAnswer %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickNext()">
 
                 <img  src="{% static 'images/mint_heart.svg' %}"/>
             </button>
                 <div id="mintletter" style="margin: 0 auto;">Completed</div>
             {% else %}
+            <!--유저의 컬러가 lemon일 시에만 -->
+            {% if user.color == 'lemon' %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
 
                 <img  src="{%static 'images/mint_heart.svg' %}"/>
             </button>
             <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
+            {% else %}
+            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="">
+
+                <img  src="{%static 'images/mint_heart.svg' %}"/>
+            </button>
+            <div id="mintletter" style="margin: 0 auto;">Not Completed</div>
+            {% endif %}
             {% endif %}
           
             </div>
@@ -32,16 +42,23 @@
             </div>
             <div class="downside">
             
-            {% if lemonAnswer %}
+            {% if MintAnswer %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickNext()">
                 <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
                 <div id="lemonletter" style="margin: 0 auto;">Completed</div>
             {% else %}
+            {% if user.color == 'mint' %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickQuestion2()">
                 <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
             <div id="lemonletter" style="margin: 0 auto;">Click to start writing</div>
+            {% else %}
+            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="">
+                <img  src="{% static 'images/lemon_heart.svg' %}"/>
+            </button>
+            <div id="lemonletter" style="margin: 0 auto;">Not Competed</div>
+            {% endif %}
             {% endif %}
             {% csrf_token %}
             </div>
@@ -109,7 +126,7 @@
               })
               .then(data => {
                 console.log('Success:', data);
-                window.location.assign(`/calandar/${currDate}`);
+                window.location.assign(`/calendar/${currDate}`);
               
                
               })
@@ -148,6 +165,7 @@
             formData.append('content',answer);
             formData.append('title',title);
             formData.append('userpk',2);
+            let currDate = viewYear.toString()+viewMonth.toString();
             console.log('answer',answer);
 
             fetch('/saveanswer/', {
@@ -158,7 +176,7 @@
               })
               .then(res => {
                 console.log('Success:', res);
-                window.location.assign('/calendar');
+                window.location.assign(`/calendar/${currDate}`);
              
                
               })

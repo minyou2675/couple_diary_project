@@ -2,6 +2,7 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/diarycreate.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 {% if user == 'lemon' %}
 <div class="wrapper">
@@ -29,7 +30,7 @@
     YOUNHEE&YUMIN
 </div>
 </div>
-{% elif user == 'user' %}
+{% elif user == 'mint' %}
 <div class="wrapper" style="background-color: #9AE9DB;">
 
     <div id="yearmonth" style="color: #FFF8B6;"></div>
@@ -68,6 +69,11 @@
 
     
           //새로운 이미지 div 추가
+        var originImage = document.getElementsByClassName('img')[0];
+        if(originImage){
+            originImage.remove()
+        }
+       
         var newImage = document.createElement("img");
         newImage.setAttribute("class", 'img');
     
@@ -96,7 +102,7 @@
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
-        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth;
+        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth+'{{day}}';
         document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
 
     }

@@ -2,6 +2,7 @@
     <head>
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/dailydiary.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         </head>
 <body>    
 
@@ -20,42 +21,51 @@
                 <img src="{% static 'images/mint_edit.svg' %}" alt="example image"> 
             </a>
             <h5>{{lemonDiary.title}}</h5>
-            {{lemonDiary.content}}
+            <h5>{{lemonDiary.content}}</h5>
         </div>
 
 </div>
     {% else %}
     <div class="upperside">
+        {% if user.color == 'lemon' %}
         <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickToMintDiaryCreate()">
         <img  src="{% static 'images/mint_heart.svg' %}">
     </button>
         <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
+        {% else %}
+        <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="">
+            <img  src="{% static 'images/mint_heart.svg' %}">
+        </button>
+            <div id="mintletter" style="margin: 0 auto;">Not Completed</div>
+            {% endif %}
     </div>
     {% endif %}
-    <div id="yearmonth">2023 MAY</div>
+    <div id="yearmonth"></div>
     
     <button class="monthlybtn" onclick="onClickToCalendar()">
         Monthly ver.
     </button>
-   
+    
         {% if  mintDiary %}
+        <div id="dday"></div>
         <div class="downsideV2">
-            <div id="dday">
-            </div>
+            
+            
             <div style="display:flex;flex-direction:row;width:200px; height:310px; background-color:#D9D9D9;">
                 {% if mintDiary.image %}
                 <img style="width:195px; height:300px;"src='{{mintDiary.image.url}}' alt="이미지 없음"/>
                 {% endif %}
-                <div style="width:154px; margin-left:10px;">
-                    <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
-                        <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
-                    </a>
-                    <h5>{{mintDiary.title}}</h5>
-                    {{mintDiary.content}}
-                </div>
                 
             
             </div>
+            <div style="width:154px; margin-left:10px;">
+                <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
+                    <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
+                </a>
+                <h5>{{mintDiary.title}}</h5>
+                <h5>{{mintDiary.content}}</h5>
+            </div>
+            
 
    
         </div>
@@ -64,10 +74,17 @@
         <div class="downside">
             <div id="dday">
             </div>
+        {% if user.color == 'mint' %}
         <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickToLemonDiaryCreate()">
         <img  src="{% static 'images/lemon_heart.svg' %}"/>
     </button>
         <div style="margin: 0 auto;">Click to start writing</div>
+        {% else %}
+        <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="">
+            <img  src="{% static 'images/lemon_heart.svg' %}"/>
+        </button>
+            <div style="margin: 0 auto;">Not Completed</div>
+        {% endif %}
         {% endif %}
     </div>
     <div class="footer">
@@ -99,6 +116,7 @@
     const renderDate = () => {
         const viewYear = date.getFullYear();
         const viewMonth = date.getMonth()+1;
+        const viewDay = '{{day}}'
         const monthList = {1 : 'JAN', 2 : 'FEB', 3 : 'MAR', 4 : 'APR', 5 : 'MAY', 6 : 'JUN', 7 : 'JUL',
                             8 : 'AUG', 9: 'SEP', 10 : 'OCT', 11: 'NOV', 12 : 'DEC'};
         const todayMonth = monthList[viewMonth.toString()];
@@ -107,7 +125,7 @@
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
-        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth;
+        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth+' '+viewDay;
         document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
 
     }
