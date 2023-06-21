@@ -1,0 +1,36 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #9AE9DB;
+    border: 1px solid #bcbcbc;
+}
+input{
+    border:0 solid black;
+   
+}
+.field{
+    display: flex;
+    flex-direction: column;
+}
+form.input.field{
+
+    background-color: white;
+}
+
+label{
+    margin-top: 30px;
+}
+input.submit{
+    position: absolute;
+    width:100px;
+    height: 50px;
+    margin-left:130px;
+    margin-top: 200px;
+    background-color: transparent;
+    background-image: url('../../../static/images/lemon_save_button.svg');
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,51 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #9AE9DB;
+    border: 1px solid #bcbcbc;
+}
+
+.logo{
+    margin-top:205px;
+    margin-left:36px;
+    margin-right:36px;
+    color:#FFF8B6;
+    width:287px;
+    height: 100px;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 52.96px;
+
+}
+.box{
+    margin-top:18px;
+    margin-left:36px;
+    margin-right:36px;
+    width:287px;
+    height:201px;
+    border: 4px solid #FFF8B6;
+}
+
+.name{
+    margin-top:18px;
+    margin-left:36px; 
+    margin-right:36px;
+    width:287px;
+    height:65px;
+    font-weight: 400;
+    font-size:31px;
+    line-height: 41.04px;
+    color:#FFF8B6;
+}
+
+img.mainHeart{
+    margin-top: 152px;
+    margin-left: 234px;
+    margin-right: 18px;
+    width: 37px;
+    height: 31px;
+}

@@ -5,9 +5,12 @@ urlpatterns = [
     path('',views.index),
     path('dailyquestion/', views.showQuestion),
     path('saveanswer/',views.saveAnswer),
-    path('calandar/', views.showCalandar),
+    path('calendar/<int:pk>/',views.showCalendar),
     path('dailydiary/',views.showDailyDiary),
-    path('diarycreate/',views.showDiaryCreate),
+    path('diarycreate/<int:pk>/',views.showDiaryCreate),
+    path('questionlist/<int:pk>',views.showQuestionList),
+    path('diary/<int:pk>',views.showDiary),
+    path('diaryupdate/<int:pk>',views.diaryUpdate),
     
     
 ]

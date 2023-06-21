@@ -1,0 +1,106 @@
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/dailydiary.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+<body>    
+    
+<div class="wrapper">
+    {% if lemonDiary %}
+    <div class="uppersideV2">
+        <div style="width:200px; height:310px; margin-top:10px; background-color:#D9D9D9;">
+        
+        {% if lemonDiary.image %}
+        <img style="width:195px; height:300px;"src='{{lemonDiary.image.url}}' alt="이미지 없음"/> 
+        {% endif %}
+         </div>
+        <div style="width:154px; margin-left:10px;">
+            <a  class="mintEdit" href="{{ lemonDiary.get_absolute_url }}">
+                <img src="{% static 'images/mint_edit.svg' %}" alt="example image"> 
+            </a>
+
+            <h5>{{lemonDiary.title}}</h5>
+            <h5>{{lemonDiary.content}}</h5>
+        </div>
+
+</div>
+    {% else %}
+    <div class="upperside">
+       
+    </div>
+    {% endif %}
+    <div id="yearmonth"></div>
+    
+    <button class="monthlybtn" onclick="onClickToCalendar()">
+        Monthly ver.
+    </button>
+   
+        
+    {% if  mintDiary %}
+    <div id="dday"></div>
+    <div class="downsideV2">
+        
+        <div style="display:flex;flex-direction:row;width:200px; height:310px; background-color:#D9D9D9;">
+            {% if mintDiary.image %}
+            <img style="width:195px; height:300px;"src='{{mintDiary.image.url}}' alt="이미지 없음"/>
+            {% endif %}  
+        </div>
+        <div style="width:154px; margin-left:10px;">
+            <a  class="lemonEdit" href="{{ mintDiary.get_absolute_url }}">
+                <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
+            </a>
+            <h5>{{mintDiary.title}}</h5>
+            <h5>{{mintDiary.content}}</h5>
+        </div>     
+    </div>
+   
+        {% else %}
+        <div class="downside">
+            <div id="dday">
+            </div>
+        </div>
+        {% endif %}
+    
+    <!-- <div class="footer">
+        YOUNHEE&YUMIN
+    </div> -->
+
+    </div>
+</body>
+
+
+</html>
+<script>
+    let date = new Date();
+    const first = new Date("2023-1-12");
+
+    function onClickToMintDiaryCreate(){
+        window.location.href = '/diarycreate/1/';
+    }
+    function onClickToLemonDiaryCreate(){
+        window.location.href = '/diarycreate/2/';
+    }
+
+    function onClickToCalendar(){
+        var year = '{{year}}';
+        var month = '{{month}}'
+        window.location.href = `/calendar/${year}${month}`;
+    }
+    
+    const renderDate = () => {
+        var year = Number('{{year}}');
+        var month = Number('{{month}}')-1;
+        var day = Number('{{day}}')
+        const curDate = new Date(year,month,day)
+        const diffDay= curDate - first;
+        const dDay = Math.floor(diffDay  / (1000*60*60*24));
+        
+
+        document.querySelector('#yearmonth').textContent = '{{year}}'+' '+'{{month_title}}' +' '+ '{{day}}';
+        document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
+
+    }
+    renderDate();
+
+</script>

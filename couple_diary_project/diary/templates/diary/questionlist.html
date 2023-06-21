@@ -1,0 +1,85 @@
+<html>
+    <head>
+        {% load static %}
+
+        <link rel="stylesheet" href="{% static 'css/questionlist.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div id="todayQuestion">
+                    TODAY'S QUESTION
+                </div>
+                <div id="questionTitle">
+                    Q: {{today_question.title}}
+                </div>
+            </div>
+            {% if pk > 1 %}
+            <input type="button" class="upScroll" onclick="onClickToPrev()" />
+            {% endif %}
+
+            {% for p in question_list %}
+      
+            <div class="answer">
+                
+                <div class="date">
+
+                    {{p.question.year}}-{{p.question.month}}-{{p.question.day}}
+                </div>
+                <div class="answerBlock">
+                    <div class="answerTitle">
+                        Q:{{p.question.title}}
+                    </div>
+                    <div class="underLine"></div>
+                    <div class="answerContent">
+                        {{partner.username}}'s Answer:
+                        {{p.lemonAnswer}}
+                        
+                    </div>
+                    <div class="underLine"></div>
+                    <div class="answerContent">
+                        {{user.username}}'s Answer:
+                        {{p.mintAnswer}}
+                    
+                    </div>
+                    <div class="underBar"></div>
+                </div>
+            </div>
+            {% endfor %}
+            {% if endPage %}
+            {% else %}
+            <input type="button" class="downScroll" onclick="onClickToNext()"/>
+            {% endif %} 
+            <button class="monthlybtn" onclick="onClickToCalendar()">
+                Monthly ver.
+            </button>
+
+
+
+          
+            <div class="footer">
+                YOUNHEE&YUMIN
+            </div>
+        </div>
+    </body>
+
+
+</html>
+<script>
+    function onClickToPrev(){
+        var prevpk = Number('{{pk}}') - 1;
+        window.location.href = '/questionlist/' +prevpk;
+    }
+    function onClickToCalendar(){
+        var month = '{{month}}';
+        var year = '{{year}}';
+        window.location.href = `/calendar/${year}${month}`;
+    }
+
+    function onClickToNext(){
+        var nextpk = Number('{{pk}}')+1;
+        window.location.href = '/questionlist/'+nextpk;
+    }
+</script>

@@ -1,6 +1,8 @@
 <html>
     <head>
-    <link rel="stylesheet" href="../../static/css/todayquestion.css">
+        {% load static %}
+    <link rel="stylesheet" href="{% static 'css/todayquestion.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
@@ -10,37 +12,53 @@
 
                 <img  src="../../static/images/mint_heart.svg"/>
             </button> -->
-            {% if mintAnswer%}
+            {% if lemonAnswer %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickNext()">
 
-                <img  src="../../static/images/mint_heart.svg"/>
+                <img  src="{% static 'images/mint_heart.svg' %}"/>
             </button>
                 <div id="mintletter" style="margin: 0 auto;">Completed</div>
             {% else %}
+            <!--유저의 컬러가 lemon일 시에만 -->
+            {% if user.color == 'lemon' %}
             <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickQuestion()">
 
-                <img  src="../../static/images/mint_heart.svg"/>
+                <img  src="{%static 'images/mint_heart.svg' %}"/>
             </button>
             <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
+            {% else %}
+            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="">
+
+                <img  src="{%static 'images/mint_heart.svg' %}"/>
+            </button>
+            <div id="mintletter" style="margin: 0 auto;">Not Completed</div>
+            {% endif %}
             {% endif %}
           
             </div>
             <div class="question">
                 <h1 style="font-size:28px; line-height:37.07px; color:#9AE9DB;">TODAY's QUESTION</h1>
-                <h3 id="question-title" style="font-size:16px; line-height:21.18px; color:#C8C8C8;">Q.당신이 가장 좋아하는 색은?</h3>
+                <h3 id="question-title" style="font-size:16px; line-height:21.18px; color:#C8C8C8;">Q.{{questionTitle}}</h3>
             </div>
             <div class="downside">
             
-            {% if lemonAnswer %}
+            {% if MintAnswer %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickNext()">
-                <img  src="../../static/images/lemon_heart.svg"/>
+                <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
                 <div id="lemonletter" style="margin: 0 auto;">Completed</div>
-            {% else%}
+            {% else %}
+            {% if user.color == 'mint' %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickQuestion2()">
-                <img  src="../../static/images/lemon_heart.svg"/>
+                <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
             <div id="lemonletter" style="margin: 0 auto;">Click to start writing</div>
+            {% else %}
+            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="">
+                <img  src="{% static 'images/lemon_heart.svg' %}"/>
+            </button>
+            <div id="lemonletter" style="margin: 0 auto;">Not Competed</div>
+            {% endif %}
             {% endif %}
             {% csrf_token %}
             </div>
@@ -62,7 +80,11 @@
     upperSide = document.getElementsByClassName('upperside')[0];
     downSide = document.getElementsByClassName('downside')[0];
     function onClickNext(){
-        window.location.href = "/calandar/";
+        let date = new Date();
+        const viewYear = date.getFullYear();
+        const viewMonth = date.getMonth()+1;
+        let currDate = viewYear.toString()+viewMonth.toString();
+        window.location.href = `/calendar/${currDate}`;
     }
     function onClickQuestion(){
         mintHeart.remove();
@@ -90,15 +112,21 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
-            formData.append('user',1);
+            formData.append('userpk',1)
+            
+            //이번달 달력으로 이동 시키기
+            let currDate = viewYear.toString()+viewMonth.toString();
+        
 
             fetch('/saveanswer/', {
                 method: 'POST',
                 headers: { "X-CSRFToken": '{{csrf_token}}' },
-                body: formData
+                body: formData,
+                redirect: 'follow'
               })
               .then(data => {
                 console.log('Success:', data);
+                window.location.assign(`/calendar/${currDate}`);
               
                
               })
@@ -116,6 +144,7 @@
         let lemonSave = document.createElement('button');
         let lemonSaveImg = new Image();
         answerForm.setAttribute('class','answerform');
+        answerForm.style.marginTop = "80px";
         lemonSave.setAttribute('class','lemonbtn');
         lemonSave.style.marginTop = '16px'; 
         lemonSaveImg.src='../../static/images/lemon_save.svg'
@@ -135,7 +164,9 @@
             formData.append('day',viewDay);
             formData.append('content',answer);
             formData.append('title',title);
-            formData.append('user',2);
+            formData.append('userpk',2);
+            let currDate = viewYear.toString()+viewMonth.toString();
+            console.log('answer',answer);
 
             fetch('/saveanswer/', {
                 method: 'POST',
@@ -145,7 +176,7 @@
               })
               .then(res => {
                 console.log('Success:', res);
-                window.location.assign('/calandar');
+                window.location.assign(`/calendar/${currDate}`);
              
                
               })
