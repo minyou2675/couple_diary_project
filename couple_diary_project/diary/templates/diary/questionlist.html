@@ -3,6 +3,7 @@
         {% load static %}
 
         <link rel="stylesheet" href="{% static 'css/questionlist.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
     </head>
     <body>
@@ -33,13 +34,13 @@
                     </div>
                     <div class="underLine"></div>
                     <div class="answerContent">
-                        윤희의 Answer:
+                        {{partner.username}}'s Answer:
                         {{p.lemonAnswer}}
                         
                     </div>
                     <div class="underLine"></div>
                     <div class="answerContent">
-                        유민의 Answer:
+                        {{user.username}}'s Answer:
                         {{p.mintAnswer}}
                     
                     </div>

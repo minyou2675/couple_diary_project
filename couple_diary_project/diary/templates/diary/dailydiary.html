@@ -2,6 +2,7 @@
     <head>
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/dailydiary.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         </head>
 <body>    
 
@@ -20,7 +21,7 @@
                 <img src="{% static 'images/mint_edit.svg' %}" alt="example image"> 
             </a>
             <h5>{{lemonDiary.title}}</h5>
-            {{lemonDiary.content}}
+            <h5>{{lemonDiary.content}}</h5>
         </div>
 
 </div>
@@ -62,7 +63,7 @@
                     <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
                 </a>
                 <h5>{{mintDiary.title}}</h5>
-                {{mintDiary.content}}
+                <h5>{{mintDiary.content}}</h5>
             </div>
             
 

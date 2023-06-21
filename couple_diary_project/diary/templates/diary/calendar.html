@@ -2,22 +2,42 @@
     <head>
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/calendar.css' %}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
     <div class="wrapper">
-
+        <div class="logout"><a href="/user/logout/">로그아웃</a></div> 
+        {% if today %}
+        <div id="yearmonth">
+            {{year}} {{month_name}} {{today}} (Today)
+        </div>
+        {% else %}
         <div id="yearmonth">
             {{year}} {{month_name}}
         </div>
+        
+        {% endif %}
+        
         <div id="dday">
 
         </div>
-
+        
         <div class="calandarMove">
         <input type="button" class="move" onclick="onClickToPrev()" value="< previous">
-        <input type="button" class="move" onclick="onClickToNext()" value="next >">    
+        <input type="button" class="move" onclick="onClickToNext()" value="next >">   
+        
         </div>
         <div class="calander">
+            <div class="weekDays">
+                <span>Mon</span> 
+                <span>Tue</span> 
+                <span>Wed</span> 
+                <span>Thu</span> 
+                <span>Fri</span> 
+                <span style="color:blue;">Sat</span> 
+                <span style="color: red">Sun</span> 
+
+            </div>
             {% for week in calendar %}
             <div class="col-7">
                 {% for day in week.week %}

@@ -2,6 +2,7 @@
     <head>
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/dailydiary.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         </head>
 <body>    
     
@@ -20,7 +21,7 @@
             </a>
 
             <h5>{{lemonDiary.title}}</h5>
-            {{lemonDiary.content}}
+            <h5>{{lemonDiary.content}}</h5>
         </div>
 
 </div>
@@ -50,7 +51,7 @@
                 <img src="{% static 'images/lemon_edit.svg' %}" alt="example image"> 
             </a>
             <h5>{{mintDiary.title}}</h5>
-            {{mintDiary.content}}
+            <h5>{{mintDiary.content}}</h5>
         </div>     
     </div>
    
@@ -88,18 +89,12 @@
     }
     
     const renderDate = () => {
-        const viewYear = date.getFullYear();
-        const viewMonth = date.getMonth()+1;
-        const viewDay = '{{day}}';
-        const monthList = {1 : 'JAN', 2 : 'FEB', 3 : 'MAR', 4 : 'APR', 5 : 'MAY', 6 : 'JUN', 7 : 'JUL',
-                            8 : 'AUG', 9: 'SEP', 10 : 'OCT', 11: 'NOV', 12 : 'DEC'};
-        const todayMonth = monthList[viewMonth.toString()];
 
         const diffDay= date - first;
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
-        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth+' '+viewDay;
+        document.querySelector('#yearmonth').textContent = '{{year}}'+' '+'{{month_title}}' +' '+ '{{day}}';
         document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
 
     }

@@ -2,6 +2,7 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/diarycreate.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 {% if user.color == 'lemon' %}
 <div class="wrapper">
@@ -12,7 +13,10 @@
     <div class="photo">
         <div class="photoUpload">
             <div  id="image-show">
+                {% if diary.image %}
                 <img class='img' src="{{diary.image.url}}" style="width: 90%; height: 90%; margin-top:10px;">
+                {% else %}
+                {% endif %}
             </div>
         <label for="chooseFile">
             Upload Picture
@@ -38,7 +42,10 @@
         <div class="photo">
             <div class="photoUpload">
                 <div  id="image-show" style="width:160px;">
+                    {% if diary.image %}
                     <img class='img' src="{{diary.image.url}}" style="width: 90%; height: 90%; margin-top:10px;">
+                    {% else %}
+                    {% endif %}
                 </div>
             <label for="chooseFile">
                 Upload Picture
@@ -103,7 +110,7 @@
         const dDay = Math.floor(diffDay  / (1000*60*60*24));
         
 
-        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth;
+        document.querySelector('#yearmonth').textContent = viewYear+' '+todayMonth+'{{day}}';
         document.querySelector('#dday').textContent = 'D-DAY'+' '+dDay;
 
     }

@@ -13,4 +13,5 @@ class User(AbstractUser):
     partner = models.EmailField(null=True,blank=True,unique=True,verbose_name=_("연인의 이메일 주소"))
     COLOR_CHOICES = (('mint',"Mint"),('lemon','Lemon'))
     color = models.CharField(max_length=10,null=False,choices=COLOR_CHOICES)
+
     

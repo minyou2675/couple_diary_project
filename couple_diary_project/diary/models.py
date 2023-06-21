@@ -28,7 +28,7 @@ class Schedule(models.Model):
     month = models.IntegerField()
     day = models.IntegerField()
     # diary = models.ForeignKey(Diary,null=True, on_delete=models.CASCADE)
-    diary = models.IntegerField()
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     
 class Question(models.Model):
     title = models.CharField(max_length=80)
