@@ -27,7 +27,7 @@
             </button>
             <div id="mintletter" style="margin: 0 auto;">Click to start writing</div>
             {% else %}
-            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="">
+            <button type="button" class="mintbtn" style="margin-top: 132px;" onclick="onClickNext()">
 
                 <img  src="{%static 'images/mint_heart.svg' %}"/>
             </button>
@@ -42,7 +42,7 @@
             </div>
             <div class="downside">
             
-            {% if MintAnswer %}
+            {% if mintAnswer %}
             <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickNext()">
                 <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
@@ -54,10 +54,10 @@
             </button>
             <div id="lemonletter" style="margin: 0 auto;">Click to start writing</div>
             {% else %}
-            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="">
+            <button type="button" class="lemonbtn" style="margin-top: 132px;" onclick="onClickNext()">
                 <img  src="{% static 'images/lemon_heart.svg' %}"/>
             </button>
-            <div id="lemonletter" style="margin: 0 auto;">Not Competed</div>
+            <div id="lemonletter" style="margin: 0 auto;">Not Completed</div>
             {% endif %}
             {% endif %}
             {% csrf_token %}
