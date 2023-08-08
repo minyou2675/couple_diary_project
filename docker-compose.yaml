@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  django_app:
+    build: ./couple_diary_project
+    container_name: django_app
+    
+    volumes:
+      - ./couple_diary_project/:/couple_diary_project
+    restart: always
+    #8000으로 안되다가 0.0.0.0:8000으로 되는 이유는???
+    command: bash -c 'cd /couple_diary_project/ && python manage.py runserver 0.0.0.0:8000 --noreload '
+    ports:
+        - "127.0.0.1:8000:8000"
