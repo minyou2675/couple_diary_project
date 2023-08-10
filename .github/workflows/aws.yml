@@ -43,9 +43,8 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script_stop: true
           script: |
-            cd couple_diary_project
-            sudo docker compose up
-
+            sudo /home/couple_diary_project/deploy.sh
+        
       - name: Remove Github Actions IP From Security Group
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
