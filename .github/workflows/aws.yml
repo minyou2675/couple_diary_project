@@ -43,7 +43,7 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script_stop: true
           script: |
-            sudo /home/couple_diary_project/deploy.sh
+            /home/couple_diary_project/deploy.sh
         
       - name: Remove Github Actions IP From Security Group
         run: |
