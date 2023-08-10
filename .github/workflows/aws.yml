@@ -44,7 +44,7 @@ jobs:
           script_stop: true
           script: |
             cd couple_diary_project
-            sudo apt-get install update
+            sudo apt update
             sudo apt-get install python
             sudo apt-get install docker
             sudo docker compose up
