@@ -45,8 +45,8 @@ jobs:
           script: |
             cd couple_diary_project
             sudo apt update
-            sudo apt-get install python
-            sudo apt-get install docker
+            sudo apt-get install python3.7
+            sudo apt install docker
             sudo docker compose up
 
       - name: Remove Github Actions IP From Security Group
