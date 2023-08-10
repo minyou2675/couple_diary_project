@@ -44,7 +44,7 @@ jobs:
           script_stop: true
           script: |
             cd /home/ubuntu/couple_diary_project
-            deploy.sh
+            ./deploy.sh
         
       - name: Remove Github Actions IP From Security Group
         run: |
