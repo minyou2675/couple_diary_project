@@ -10,5 +10,6 @@ services:
     restart: always
     #8000으로 안되다가 0.0.0.0:8000으로 되는 이유는???
     command: bash -c 'cd /couple_diary_project/ && python manage.py runserver 0.0.0.0:8000 --noreload '
+      #127.0.0.1은 루프백이므로 0.0.0.0 으로 배포야 모든 트래픽이 접근 가능
     ports:
-        - "127.0.0.1:8000:8000"
+        - "0.0.0.0:8000:8000"
