@@ -30,6 +30,10 @@ jobs:
         with:
           switches: -avzr --delete
           remote_path: /home/ubuntu/srv/ubuntu/
+          remote_host: ${{ secrets.AWS_SSH_HOST }}
+          remote_user: ubuntu
+          remote_key: ${{ secrets.AWS_SSH_KEY }}
+
         
       - name: SSH Commands
         uses: appleboy/ssh-action@v0.1.6
