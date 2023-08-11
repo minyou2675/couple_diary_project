@@ -11,5 +11,5 @@ RUN apt-get -y update
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-RUN systemctl start gunicorn
-RUN systemctl enable gunicorn
+# RUN systemctl start gunicorn
+# RUN systemctl enable gunicorn
