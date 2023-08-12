@@ -1,0 +1,1 @@
+2023/08/11 20:25:46 [error] 476#476: *1518 connect() failed (111: Connection refused) while connecting to upstream, client: 172.20.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", upstream: "http://172.28.128.1:110/favicon.ico", host: "localhost", referrer: "http://localhost/"
