@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - develop#1
+      - dev
 
 jobs:
   deploy:
@@ -44,6 +44,8 @@ jobs:
           script_stop: true
           script: |
             cd /home/ubuntu/couple_diary_project
+            git checkout dev
+            git pull
             ./deploy.sh
         
       - name: Remove Github Actions IP From Security Group
