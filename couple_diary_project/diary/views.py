@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from calendar import monthcalendar,monthrange 
 import random
 from django.contrib import messages
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -74,11 +75,17 @@ def showQuestionList(request,pk):
     month = datetime.today().month
     year = datetime.today().year
     day = datetime.today().day
-    today_question = Question.objects.get(year=year,month=month,day=day)
-    
+    #캐시에서 먼저 확인
+    today_question = cache.get('today_question')
+    if not today_question:
+        today_question = Question.objects.get(year=year,month=month,day=day)
+        cache.set('today_question',today_question,timeout=60*60)
     #유저답변 필터링
     user = request.user
-    partner = User.objects.get(email=user.partner)
+    partner = cache.get('partner')
+    if not partner:
+        partner = User.objects.get(email=user.partner)
+        cache.set('partner',partner)
     if user.color == 'mint':
         mintUser = request.user
         lemonUser = partner
