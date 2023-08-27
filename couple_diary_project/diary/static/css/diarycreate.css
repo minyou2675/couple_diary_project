@@ -18,13 +18,12 @@ input{
     margin-top: 28px;
     margin-left: 12px;
     margin-right: 156px;
-    width: 180px;
+    /* width: 180px; */
     height: 32px;
     font-size: 32px;
     font-weight: 400;
     line-height: 42.37px;
     color: #9AE9DB;
-  
 }
 
 #dday{
@@ -36,7 +35,6 @@ input{
     font-weight: 400;
     font-size: 24px;
     color: #FFFFFF;
-
 }
 
 .photo{
@@ -46,7 +44,6 @@ input{
     width:190px;
     height: 310px;
     background-color: #FFFFFF;
-    
 }
 
 .photoUpload{
