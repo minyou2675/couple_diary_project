@@ -53,5 +53,11 @@ class Answer(models.Model):
     def __str__(self):
         return f'{self.pk}-{self.author}-{self.content}'
     
+    #Answer 데이터에 대한 인덱싱 처리 
+    # class Meta:
+    #     indexes = [
+    #         "month","day"
+    #     ]
+    
 
 # Create your models here.

@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from calendar import monthcalendar,monthrange 
 import random
 from django.contrib import messages
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -19,6 +20,7 @@ def celebration(first,delta): #first는 %Y%m%d 형식 delta는 기념일에 해�
 def index(request):
     return render(request,'diary/index.html')
 
+#다이어리 수정
 def diaryUpdate(request,pk):
     day = datetime.today().day
     user = request.user
@@ -35,7 +37,7 @@ def diaryUpdate(request,pk):
         diary.save()
         return redirect(f'/diary/{diary.year}{diary.month}{diary.day}')
     return render(request,'diary/diaryupdate.html',{'user':user,'diary':diary,'day':day})
-
+#다이어리 읽기
 def showDiary(request,pk):
     
     monthList = {1 : 'JAN', 2 : 'FEB', 3 : 'MAR', 4 : 'APR', 5 : 'MAY', 6 : 'JUN', 7 : 'JUL',
@@ -68,17 +70,23 @@ def showDiary(request,pk):
 
     return render(request,'diary/diary.html',context={'mintDiary' : mintDiary, 'lemonDiary':lemonDiary,'year':year,'month':month,
                                                       'day':day,'month_title':month_title,'user':user})
-
+#질문과 답변들 확인
 def showQuestionList(request,pk):
     #오늘의 질문 구하기
     month = datetime.today().month
     year = datetime.today().year
     day = datetime.today().day
-    today_question = Question.objects.get(year=year,month=month,day=day)
-    
+    #캐시에서 먼저 확인
+    today_question = cache.get('today_question')
+    if not today_question:
+        today_question = Question.objects.get(year=year,month=month,day=day)
+        cache.set('today_question',today_question,timeout=60*60)
     #유저답변 필터링
     user = request.user
-    partner = User.objects.get(email=user.partner)
+    partner = cache.get('partner')
+    if not partner:
+        partner = User.objects.get(email=user.partner)
+        cache.set('partner',partner)
     if user.color == 'mint':
         mintUser = request.user
         lemonUser = partner
@@ -113,11 +121,7 @@ def showQuestionList(request,pk):
                ,'user':user,'partner':partner}
     
     return render(request,'diary/questionlist.html',context)
-
-
-    
-    
-
+#다이어리 작성    
 def showDiaryCreate(request,pk):
     if request.method == 'GET':
         author = request.user
@@ -155,7 +159,7 @@ def showDiaryCreate(request,pk):
         newDiary.save()
     
         return redirect('/dailydiary/')
-
+#오늘의 다이어리 읽기
 def showDailyDiary(request):
     month = datetime.today().month
     year = datetime.today().year
@@ -188,7 +192,12 @@ def showDailyDiary(request):
       
     context = {'year':year,'month':month,'day':day,'mintDiary' : mintDiary, 'lemonDiary' : lemonDiary}
     return render(request, 'diary/dailydiary.html',context)
-
+#다이어리 삭제
+def deleteDiary(request,pk):
+    if request.method == 'DELETE':
+        author = request.user
+        diary = Diary.objects.get(author=author,pk=pk)
+        diary.delete()
 #달력 VIEW
 def showCalendar(request,pk):
     #유저 파트너 객체 
