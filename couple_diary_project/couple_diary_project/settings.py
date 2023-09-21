@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'diary',
     'users',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

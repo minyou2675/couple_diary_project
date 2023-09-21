@@ -8,4 +8,6 @@ from diary.models import Diary
 class DiaryView(generics.CreateAPIView):
     queryset = Diary.objects.all()
     serializer_class = DiarySerializer
-    
+class ShowDiaryView(generics.ListAPIView):
+    queryset = Diary.objects.all()
+    serializer_class = DiarySerializer    
