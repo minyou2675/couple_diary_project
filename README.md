@@ -22,27 +22,8 @@ docker compose up -d
             <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=green"/>
             <img src="https://img.shields.io/badge/CSS-red?style=flat&logo=CSS3&logoColor=#1572B6"/>
 
-## 아키텍쳐
 
 
-
-
-## 주요기능(23.08 최신)
-### 회원가입 및 로그인
-
-### 오늘의 질문
-
-### 달력기능
-
-### 커플 다이어리 작성
-
-### 오늘의 질문 열람
-
-### 이전 다이어리 확인
-
-### 기념일 기능(업데이트 중)
-
-### D-DAY 기능(업데이트 중)
 
 
 
